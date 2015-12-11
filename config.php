@@ -12,7 +12,7 @@ define ('SITE_DIR', $siteDir);
 //константы для подключения к базе данных
 define('HOST', 'localhost'); 		//сервер
 define('USER', 'root'); 			//пользователь
-define('PASSWORD', 'mysql'); 			//пароль
+define('PASSWORD', ''); 			//пароль
 define('NAME_BD', 'bdgm');		//база
 
 

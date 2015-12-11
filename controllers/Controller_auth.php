@@ -7,9 +7,10 @@
  */
 
 class Controller_auth {
-    function actionShowAuth(){//показываем форму авторизации
 
-  //      $error = $this->error;
+    public $error=null;
+    function actionShowAuth(){//показываем форму авторизации
+        $error = $this->error;
         include (SITE_PATH.'views/auth.php');
         return true;
     }
@@ -27,10 +28,12 @@ class Controller_auth {
                   }else{
                       $hash = Datas::generateCode(20);
                       Users::updateUsersByParam('user_hash',$hash,$res[0]['id']);
-                      setcookie("hash", $hash, time()+60*60*24);
+                      setcookie("hash", $hash, time()+60*60*13);
+                      setcookie("uid", $res[0]['id'], time()+60*60*13);
+                      header('Location: /'.SITE_DIR.'/');
                   }
               }
         return true;
     }
 
-} 
+}
