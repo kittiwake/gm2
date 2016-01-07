@@ -1,0 +1,363 @@
+/* CSS Document */
+#calendar{
+    border:0px;
+}
+#calendar tbody tr{
+    height:40px;
+}
+#calendar td{
+    width:80px;
+    border:0px;
+    border:solid 1px #3f3d8c;
+    font-size:22px;
+    text-align:center;
+}
+#calendar th{
+    background-color:#807fb8;
+    border:solid 1px #3f3d8c;
+    color:#ffffff;
+}
+#calendar td.none{
+    border:0px;
+}
+#calendar td.holiday{
+    background-color:#f5a185;
+}
+.day{
+    background-color:#CCFFCC;
+}
+#calendar td.today{
+    background-color:#FFFF99;
+    border-color:#FF531A;
+}
+#calendar table.week{
+    border:0px;
+    padding:0px;
+    margin:0;
+}
+#calendar a{
+    color: #180080; /* Цвет обычной ссылки */
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+}
+#calendar   a:visited {
+    color: #180080; /* Цвет посещённой ссылки */
+}
+#calendar   a:hover {
+    color: #800000; /* Цвет ссылки при наведении на нее курсора мыши */
+    text-decoration: underline; /* Добавляем подчеркивание */
+}
+
+
+/* файл menu.php */
+* {
+    margin:0;
+    padding:0;
+}
+
+#shapka{
+    position:fixed;
+    top: 0px;
+    display:table;
+    width: 100%;
+}
+#hello{
+    width: 170px;
+    display: table-cell;
+    vertical-align: middle;
+}
+#menu{
+    display: table-cell;
+}
+#nav {
+    font:13px verdana, arial, helvetica, sans-serif;
+    list-style-type:none;
+    width:100%;
+    height:25px;
+    display:inline-block;
+    background:#9FD2D7;
+    line-height:25px;
+}
+#nav li{
+    float:left;
+    width:130px;
+    margin-top:-10000px;
+}
+#nav li a {
+    width:130px;
+    text-decoration:none;
+    text-align:center;
+    color:#3A3732;
+    position:relative;
+    float:left;
+    margin-right:-129px;
+    margin-top:10000px;
+}
+#nav li a:hover, #content #nav li a:focus, #content #nav li a:active {
+    background:#797466;
+    margin-right:0;
+    color:#fff;
+}
+#nav li ul {
+    background:#A39E92;
+    float:left;
+    margin-top:-25px;
+    padding-top:25px;
+    margin-bottom:-10000px;
+    list-style-type:none;
+}
+#nav li ul li {
+    float:none;
+    margin:0;
+    width:auto;
+}
+#nav li ul li a {
+    float:none;
+    display:block;
+    margin:0;
+    margin-right:-1px;
+    background:#BFBCB5;
+}
+
+.content{
+    background-color: #f5a185;
+    margin-top: 30px;
+}
+
+/*план вывоза*/
+.rad{
+    border-radius: 8px;
+    /*   float: right;*/
+
+}
+.plan{
+    width:100%;
+}
+.plan td {
+    vertical-align:top;
+}
+.oneday{
+    width: 100%;
+}
+.oneday td {
+    vertical-align:middle;
+    text-align: center;
+    width: 46%;
+}
+.plandate {
+    text-align: left !important;
+}
+.summa {
+    text-align: right !important;/*устанавливает приоритет*/
+}
+/*assembly*/
+.grafik{
+    width: 70%;
+}
+.planirovanie{
+    width: 30%;
+    background-color: floralwhite;
+    float: right;
+    border: solid #f5a185;
+}
+#in_mount{
+    display: none;
+}
+.ass_row{
+    display: table-row;
+}
+.ass_cell{
+    display: table-cell;
+    width: 180px;
+    border: floralwhite solid;
+    background-color: darksalmon;
+    text-align: center;
+}
+.active{
+    background-color: saddlebrown;
+    color: wheat;
+}
+.passive{
+    background-color: darksalmon;
+    color: black;
+}
+.grafik .oneday{
+    width: 90%;
+    margin: 20px;
+}
+.grafik #date{
+    background-color: saddlebrown;
+    color: wheat;
+    text-align: center;
+}
+.grafik .coll_list{
+    display: table;
+    width: 100%;
+}
+.grafik .row{
+    display: table-row;
+}
+.grafik .cel{
+    display: table-cell;
+    border:  solid saddlebrown;
+    text-align: center;
+}
+.grafik .oneday table{
+    border: solid saddlebrown;
+    border-collapse: collapse;
+}
+.grafik .oneday td{
+    border: solid saddlebrown;
+    background-color: wheat;
+}
+.grafik .oneday td:nth-of-type(1){
+    width: 10%;
+}
+.grafik .oneday td:nth-of-type(3){
+    width: 12%;
+}
+.grafik .oneday td:nth-of-type(4){
+    width: 9%;
+}
+#fon{
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index:1;
+    background-color: #000000;
+    display: none;
+}
+#form {
+    position: fixed;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+    left: 100px;
+    top: 50px;
+    margin: auto;
+    z-index: 2;
+    background-color: #FFFFFF;
+    display: none;
+}
+#fc{
+    z-index: 3;
+}
+
+
+/*
+.assembly{
+    background-color: #ecffcf;
+    float: left;
+    display: table;
+    width: 40%;
+}
+.to_plan{
+    display: table;
+    width: 45%;
+    padding-left: 20px;
+}
+.ass_table, .pl_table, .assd_table{
+    display: table;
+    width: 100%;
+}
+.ass_row, .assd_row, .pl_row{
+    display: table-row;
+}
+.ass_date, .ass_day, .ass_con, .pl_con{
+    display: table-cell;
+}
+.submit{
+    position: fixed;
+    right: 120px;
+    top: 120px;
+}
+.submit input{
+    border:8px outset rgba(52, 152, 211, 0.71);
+}
+*/
+
+
+/*repsb*/
+.list_right{
+    width: 25%;
+    height: 100%;
+    background-color: blanchedalmond;
+    float: right;
+}
+.info{
+    width: 70%;
+}
+.caption{
+    text-align: center;
+}
+.collector{
+    padding-left: 30%;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+.list_right{
+    padding-left: 10px;
+    padding-top: 20px;
+    line-height: 160%;
+}
+.list_right li{
+    list-style-type: none;
+    color: darkred;
+}
+.list_right li:hover{
+    background: #786b59; /* Цвет фона под ссылкой */
+    color: #ffe; /* Цвет ссылки */
+}
+.table-left{
+    text-align: center;
+    width: 40%;
+    background-color: gainsboro;
+}
+.table-right{
+    text-align: center;
+    background-color: honeydew;
+    width: 58%;
+    float: right;
+}
+.one-table{
+    padding: 5px 0px;
+    font-size: 18px;
+
+}
+.one-table table, .table-left table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: navajowhite;
+}
+.one-table td, th, .table-left td, th{
+    border: black solid 1px;
+    font-size: 16px;
+}
+.one-table td{
+    background-color: honeydew;
+}
+.table-left td{
+    background-color: ghostwhite;
+}
+
+/*collector*/
+.col_center{
+}
+.col_left{
+    background-color: rgba(255, 255, 0, 0.65);
+    width: 270px;
+    float: left;
+
+}
+.col_right{
+    background-color: rgba(73, 255, 147, 0.69);
+    width: 280px;
+    float: right;
+}
+h3{
+    text-align: center;
+}
