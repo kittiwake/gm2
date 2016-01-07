@@ -12,6 +12,9 @@ class Controller_schedule {
 
         $ri = $_COOKIE['ri'];
         $log = $_COOKIE['login'];
+        if(!isset($ri)){
+            header('Location: /'.SITE_DIR.'/');
+        }
 
         //количество недель для отображения
         $nW = 6;

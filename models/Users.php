@@ -31,6 +31,18 @@ class Users {
 
     }
 
+    public static function getUserById($uid){
+
+        $db = Db::getConection();
+
+        $res = $db->prepare('SELECT * FROM `users` WHERE `id` = :val');
+        $res->execute(array(
+            ':val'=>$uid));
+        $res->setFetchMode(PDO::FETCH_ASSOC);
+
+        return $res->fetch();
+    }
+
     public static function updateUsersByParam($pole, $val, $oid){
 
         $db = Db::getConection();

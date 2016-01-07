@@ -12,6 +12,9 @@ class Controller_new {
 
         $ri = $_COOKIE['ri'];
         $log = $_COOKIE['login'];
+        if(!isset($ri)){
+            header('Location: /'.SITE_DIR.'/');
+        }
 
         $contract='';
         $con_date='';

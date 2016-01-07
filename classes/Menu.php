@@ -24,6 +24,10 @@ class Menu {
 
         if(in_array($ri,array(1,3,4))) $menu .= '<li><a href="/'.SITE_DIR.'/assembly/plan">Сборки</a></li>';
 
+        $menu .= '<li><a href="#">Отчеты</a><ul>';
+        if(in_array($ri,array(1,3))) $menu .= '<li><a href="/'.SITE_DIR.'/report/assembly">Сборки</a></li>';
+        $menu .= '</ul></li>';
+
         $menu .= '</ul>';
 
         return $menu;

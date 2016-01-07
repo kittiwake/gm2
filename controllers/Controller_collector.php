@@ -12,6 +12,10 @@ class Controller_collector {
 
         $ri = $_COOKIE['ri'];
         $log = $_COOKIE['login'];
+        if(!isset($ri)){
+            header('Location: /'.SITE_DIR.'/');
+        }
+
         $user = $_COOKIE['uid'];
 
         if($ri!=17){

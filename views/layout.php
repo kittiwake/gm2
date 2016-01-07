@@ -7,7 +7,6 @@
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/calendar_ru.js"></script>
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/jquery.cookie.js"></script>
-    <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/script.js"></script>
 </head>
 
 <body>
@@ -25,4 +24,6 @@
 <?php include ($page); ?>
 
 </body>
+<script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/script.js"></script>
+
 </html>
