@@ -46,6 +46,7 @@
                 <th>Адрес</th>
                 <th></th>
             </tr>
+
             <?php foreach($order_current as $order):?>
                 <tr>
                     <td><?=$order['contract']?></td>
