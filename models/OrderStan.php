@@ -79,6 +79,36 @@ AND `sborka_end_date`>= (CURDATE( ) - INTERVAL 1 MONTH ) ');
 
     }
 
+    public static function getTechEnd($tech, $begindate, $enddate){
+
+        $db = Db::getConection();
+
+        $orderList = array();
+
+        $res = $db->prepare('
+SELECT *
+FROM `order_stan`,`orders`
+WHERE `order_stan`.`oid` = `orders`.`id`
+AND  `tech_end` = \'2\'
+AND `technologist` = :val2
+AND `tech_date`>= :begindate
+AND `tech_date`<= :enddate
+');
+        $res->execute(array(
+            ':begindate'=>$begindate,
+            ':enddate'=>$enddate,
+            ':val2'=>$tech
+        ));
+        $res->setFetchMode(PDO::FETCH_ASSOC);
+
+        while ($row = $res->fetch()){
+            $orderList[$row['oid']] = $row;
+        }
+
+        return $orderList;
+
+    }
+
     public static function getNeSobr($coll){
 
         $db = Db::getConection();
@@ -104,6 +134,17 @@ AND `collector` = :val2
         return $orderList;
 
     }
+    public static function add($oid,$term){
+
+        $db = Db::getConection();
+
+        $stmt2 = $db -> prepare("INSERT INTO order_stan (oid, plan) VALUES (:oid, :plan) ");
+        $stmt2 -> execute(array(
+            ':oid' => $oid,
+            ':plan' => $term
+        ));
+    }
+
 
     public static function updateStanByParam($pole, $val, $oid){
 

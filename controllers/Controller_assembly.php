@@ -12,7 +12,7 @@ class Controller_assembly{
         $ri = $_COOKIE['ri'];
         $log = $_COOKIE['login'];
         if(!isset($ri)){
-            header('Location: /'.SITE_DIR.'/');
+            header('Location: /'.SITE_DIR.'/auth/showAuth');
         }
 
 //список сборщиков

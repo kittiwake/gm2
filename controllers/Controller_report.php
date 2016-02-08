@@ -9,7 +9,7 @@ class Controller_report
         $log = $_COOKIE['login'];
 
         if(!isset($ri)){
-            header('Location: /'.SITE_DIR.'/');
+            header('Location: /'.SITE_DIR.'/auth/showAuth');
         }
 
         $begin = '';
@@ -70,6 +70,36 @@ class Controller_report
       }
 
         $page = SITE_PATH . 'views/repsb.php';
+        include(SITE_PATH . 'views/layout.php');
+
+        return true;
+    }
+
+    function actionAveturnover()
+    {
+
+        $ri = $_COOKIE['ri'];
+        $log = $_COOKIE['login'];
+
+        if(!isset($ri)){
+            header('Location: /'.SITE_DIR.'/');
+        }
+
+        $year = date('Y');
+        $month = date('n'); //Порядковый номер месяца без ведущих нулей
+        $arr = array();
+        $rekl = array();
+        $sum = 0;
+        $int = ($year-2014)*12+($month-7)+1;
+        for($i=0; $i<$int; $i++){
+            $arr[$i] = Order::getNeRekl($i);
+            $rekl[$i] = Order::getRekl($i);
+            $sum += $arr[$i]['SUM(sum)'];
+
+        }
+        $sredn = round ($sum/$int);
+
+        $page = SITE_PATH . 'views/repaveturnover.php';
         include(SITE_PATH . 'views/layout.php');
 
         return true;

@@ -13,7 +13,7 @@ class Controller_new {
         $ri = $_COOKIE['ri'];
         $log = $_COOKIE['login'];
         if(!isset($ri)){
-            header('Location: /'.SITE_DIR.'/');
+            header('Location: /'.SITE_DIR.'/auth/showAuth');
         }
 
         $contract='';
@@ -35,7 +35,7 @@ class Controller_new {
         $disList = array();
         foreach ($userList as $disid){
             $datadis = Users::getUserById($disid['uid']);
-            if($datadis['operative'] == 1){
+            if($datadis['validation'] == 1){
                 $disList[] = array('uid' => $datadis['id'], 'name' => $datadis['name']);
             }
         }
@@ -58,6 +58,7 @@ class Controller_new {
             }
             if (isset($_POST['term'])) {
                 $termin = $_POST['term'];
+                $term = Datas::checkSunday($termin);
             }
             if (isset($_POST['sum'])) {
                 $sum = str_replace(",", ".", $_POST['sum']);
@@ -115,7 +116,14 @@ class Controller_new {
             $result = NULL;
             if (!$errors) {
                 //вносим в базу
-                $result = Order::add($contract, $con_date, $name, $prod, $adress, $phone, $termin, $dis, $sum, $pred, $rassr, $beznal, $note);
+                $result = Order::add($contract, $con_date, $name, $prod, $adress, $phone, $term, $dis, $sum, $pred, $rassr, $beznal);
+                if(!empty($result)){
+                    OrderStan::add($result, $term);
+                    if($note != ''){
+                        Notes::setNote($result, $note);
+                    }
+                }
+
             }
         }
 
@@ -131,7 +139,7 @@ class Controller_new {
         $dubl = Order::getOrdersByParam('contract',$con);
 
         if (!empty($dubl)){
-            echo'Уже есть заказ с таким номером';
+            echo 'Уже есть заказ с таким номером';
         }
         return true;
     }

@@ -73,7 +73,7 @@ var sccy=now.getFullYear();
 var ccm=now.getMonth();
 var ccy=now.getFullYear();
 	 
-document.write('<table id="fc" style="position:absolute;border-collapse:collapse;background:#FFFFFF;border:1px solid #303030;display:none;-moz-user-select:none;-khtml-user-select:none;user-select:none;" cellpadding=2>');
+document.write('<table id="fc" style="border-collapse:collapse;background:#FFFFFF;border:1px solid #303030;display:none;-moz-user-select:none;-khtml-user-select:none;user-select:none;" cellpadding=2>');
 document.write('<tr style="font:bold 13px Arial"><td style="cursor:pointer;font-size:15px" onclick="csubm()">&laquo;</td><td colspan="5" id="mns" align="center"></td><td align="right" style="cursor:pointer;font-size:15px" onclick="caddm()">&raquo;</td></tr>');
 document.write('<tr style="background:#FF9900;font:12px Arial;color:#FFFFFF"><td align=center>П</td><td align=center>В</td><td align=center>С</td><td align=center>Ч</td><td align=center>П</td><td align=center>С</td><td align=center>В</td></tr>');
 for(var kk=1;kk<=6;kk++) {
@@ -95,6 +95,7 @@ document.all?document.attachEvent('onclick',checkClick):document.addEventListene
 var updobj;
 function lcs(ielem) {
 	updobj=ielem;
+    getObj('fc').style.position='absolute';
 	getObj('fc').style.left=(Left(ielem)-60)+'px';
     getObj('fc').style.top=Top(ielem)+ielem.offsetHeight+'px';
 	getObj('fc').style.display='';
@@ -113,6 +114,28 @@ function lcs(ielem) {
 		prepcalendar(curdtarr[0],curdtarr[1]-1,curdtarr[2]);
 	}
 	
+}
+function lcs1(ielem) {
+	updobj=ielem;
+	getObj('fc').style.position='fixed';
+	getObj('fc').style.left=(Left(ielem)-60)+'px';
+    getObj('fc').style.top=Top(ielem)+ielem.offsetHeight+'px';
+	getObj('fc').style.display='';
+
+	// First check date is valid
+	curdt=ielem.value;
+	curdtarr=curdt.split('-');
+	isdt=true;
+	for(var k=0;k<curdtarr.length;k++) {
+		if (isNaN(curdtarr[k]))
+			isdt=false;
+	}
+	if (isdt&(curdtarr.length==3)) {
+		ccm=curdtarr[1]-1;
+		ccy=curdtarr[2];
+		prepcalendar(curdtarr[0],curdtarr[1]-1,curdtarr[2]);
+	}
+
 }
 
 function evtTgt(e)

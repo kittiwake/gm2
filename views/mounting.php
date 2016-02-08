@@ -8,14 +8,14 @@
             <p><label><input type="radio" name="dubl" value="0">перенести</label></p>
             <p><label><input type="radio" name="dubl" value="1">продлить</label></p>
             <p>на</p>
-            <input type="text" id="newdate" name="newdate" size="8" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this);">
+            <input type="text" id="newdate" name="newdate" size="8" onfocus="this.select();lcs1(this)" onclick="event.cancelBubble=true;this.select();lcs1(this);">
             <input type="submit" name="submitok" value="Ok">
         </form>
     </div>
     <div class="planirovanie">
         <div class="ass_row">
             <div class="ass_cell active" id="plan" onclick="inPlanirovanie('plan');">плановые</div>
-            <div class="ass_cell passive" id="mount" onclick="inPlanirovanie('mount')">незакрытые сборки</div>
+      <!--      <div class="ass_cell passive" id="mount" onclick="inPlanirovanie('mount')">незакрытые сборки</div> -->
             <div class="ass_cell passive" id="holiday" onclick="inPlanirovanie('holiday')">выходные</div>
         </div>
         <div class="plan_ass" id="in_plan">
@@ -50,7 +50,7 @@
                 <?php endforeach; ?>
             </table>
         </div>
-        <div class="plan_ass" id="in_mount">
+ <!--       <div class="plan_ass" id="in_mount">
             <table>
                 <tr>
                     <td>№заказа</td>
@@ -68,6 +68,7 @@
                 <?php endforeach;?>
             </table>
         </div>
+        -->
         <div class="plan_ass" id="in_holiday">
             <?php foreach ($sborList as $keysb=>$collector):?>
                 <div id="hol<?=$keysb?>">

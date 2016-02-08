@@ -24,7 +24,6 @@ class Router {
         $routes = $this->getRoute();
         //определить контроллер и экшн
         $segments = explode('/', $routes);
-        //  var_dump($segments);
 
         $controllerName = 'Controller_' . array_shift($segments);
 

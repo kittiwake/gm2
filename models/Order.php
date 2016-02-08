@@ -64,7 +64,55 @@ class Order {
 
     }
 
-    public static function add($contract, $contract_date, $name, $product, $adress, $phone, $term, $designer, $sum, $prepayment, $rassr, $beznal, $note){
+    public static function getOrdersNoReckoning(){
+
+        $db = Db::getConection();
+
+        $orderList = array();
+
+        $res = $db->prepare('
+              SELECT `contract`,`oid`, `technologist`, `tech_date`
+			  FROM `orders`, `order_stan`
+			  WHERE `orders`.`id` = `order_stan`.`oid`
+			  AND `order_stan`.`tech_end` = \'0\'
+			  AND `order_stan`.`tech_date` != \'0000-00-00\'
+			  ');
+        $res->execute();
+        $res->setFetchMode(PDO::FETCH_ASSOC);
+
+        while ($row = $res->fetch()){
+            $orderList[] = $row;
+        }
+        return $orderList;
+
+    }
+
+    public static function getOrdersNoaAppointTech(){
+
+        $db = Db::getConection();
+
+        $orderList = array();
+
+        $res = $db->prepare('
+              SELECT `contract`,`oid`, `designer`, `term`, `sum`
+			  FROM `orders`, `order_stan`
+			  WHERE `orders`.`id` = `order_stan`.`oid`
+			  AND `order_stan`.`tech_end` = \'0\'
+			  AND `order_stan`.`tech_date` = \'0000-00-00\'
+			  AND `order_stan`.`otgruz_end` != \'2\'
+			  ORDER BY `plan`
+			  ');
+        $res->execute();
+        $res->setFetchMode(PDO::FETCH_ASSOC);
+
+        while ($row = $res->fetch()){
+            $orderList[] = $row;
+        }
+        return $orderList;
+
+    }
+
+    public static function add($contract, $contract_date, $name, $product, $adress, $phone, $term, $designer, $sum, $prepayment, $rassr, $beznal){
 
         $db = Db::getConection();
 
@@ -72,8 +120,7 @@ class Order {
         $stmt = $db->prepare("INSERT INTO orders (contract, contract_date, name, product, adress, phone, date, term, designer, sum, prepayment, rassr, beznal)
 VALUES (:contract, :contract_date, :name, :product, :adress, :phone, CURDATE(), :term, :designer, :sum, :prepayment, :rassr, :beznal)");
 
-        $term = Datas::checkSunday($term);
-        $res1 = $stmt -> execute(array(
+        $stmt -> execute(array(
             'contract' => $contract,
             'contract_date'=> Datas::dateToDb($contract_date),
             'name' => $name,
@@ -90,22 +137,7 @@ VALUES (:contract, :contract_date, :name, :product, :adress, :phone, CURDATE(), 
 
         $oid = $db->lastInsertId ();
 
-        $stmt2 = $db -> prepare("INSERT INTO order_stan (oid, plan) VALUES (:oid, :plan) ");
-        $res2 = $stmt2 -> execute(array(
-            ':oid' => $oid,
-            ':plan' => $term
-        ));
-
-        if($note != ''){
-            $stmt3 = $db -> prepare("INSERT INTO notes (oid, note, date) VALUES (:oid, :note, CURDATE()) ");
-            $res3 = $stmt3 -> execute(array(
-                ':oid' => $oid,
-                ':note' => $note
-            ));
-        }
-
-        $res = $res1 && $res2;
-        return $res;
+        return $oid;
     }
 
     public static function updateOrdersByParam($pole, $val, $oid){
@@ -119,6 +151,69 @@ VALUES (:contract, :contract_date, :name, :product, :adress, :phone, CURDATE(), 
         ));
 
         return $answer;
+    }
+
+    public static function getNeRekl($n){
+
+        $db = Db::getConection();
+
+        $res = $db->prepare('
+SELECT SUM(sum), COUNT(sum)
+FROM `orders` , `order_stan`
+WHERE `contract` NOT REGEXP \'^.*[РД][1-9]?$\'
+AND `orders`.`id` = `order_stan`.`oid`
+AND `order_stan`.`plan`>= DATE_ADD(\'2014-07-01\',INTERVAL :n1 MONTH)
+AND `order_stan`.`plan`< DATE_ADD(\'2014-07-01\',INTERVAL :n2 MONTH)
+');
+        $res->execute(array(
+            ':n1'=> $n,
+            ':n2'=>  $n+1
+    ));
+
+        return $res->fetch();
+    }
+
+    public static function getRekl($n){
+
+        $db = Db::getConection();
+
+        $res = $db->prepare('
+SELECT COUNT(sum)
+FROM `orders` , `order_stan`
+WHERE `contract` REGEXP \'^.*[РД][1-9]?$\'
+AND `orders`.`id` = `order_stan`.`oid`
+AND `order_stan`.`plan`>= DATE_ADD(\'2014-07-01\',INTERVAL :n1 MONTH)
+AND `order_stan`.`plan`< DATE_ADD(\'2014-07-01\',INTERVAL :n2 MONTH)
+');
+        $res->execute(array(
+            ':n1'=> $n,
+            ':n2'=>  $n+1
+    ));
+
+        return $res->fetch();
+    }
+
+    public static function getClaimsNoSum() {
+
+        $db = Db::getConection();
+
+        $orderList = array();
+
+        $res = $db->prepare('
+SELECT `oid`, `contract`, `sum`, (SELECT `name` FROM `users` WHERE `users`.`id` = `orders`. `technologist`) AS `tech`
+FROM `orders` , `order_stan`
+WHERE `contract` REGEXP \'^.*[РД][1-9]?$\'
+AND `orders`.`id` = `order_stan`.`oid`
+AND `orders`.`sum` < 1000
+AND `order_stan`.`otgruz_end`!= \'2\'
+');
+        $res->execute();
+        $res->setFetchMode(PDO::FETCH_ASSOC);
+
+        while ($row = $res->fetch()){
+            $orderList[] = $row;
+        }
+        return $orderList;
     }
 
 

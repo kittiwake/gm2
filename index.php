@@ -10,6 +10,9 @@ include ('config.php');
 $dbObject = new PDO('mysql:host=' . HOST . ';dbname=' . NAME_BD, USER, PASSWORD);
 $dbObject->exec('SET CHARACTER SET utf8');
 
+// проверка подключения
+
+//начать сессию
 
 // Загружаем router
 $router = new Router();

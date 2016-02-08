@@ -57,10 +57,8 @@ class Datas {
     }
 
     public static function isRekl ($contract){//если рекламация, возвращаем true
-        $lit1 = Datas::substr_function($contract, -1, 1);
-        $lit2 = Datas::substr_function($contract, -2, -1);
 
-        if (($lit1 == 'Р') || ($lit2 == 'Р') || ($lit1 == 'Д') || ($lit2 == 'Д')){
+        if (preg_match('/^.*[РрД][1-9]?$/', $contract) == 1){
             return true;
         }
         return false;

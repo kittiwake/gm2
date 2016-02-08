@@ -12,9 +12,10 @@ define ('SITE_DIR', $siteDir);
 //константы для подключения к базе данных
 define('HOST', 'localhost'); 		//сервер
 define('USER', 'root'); 			//пользователь
-define('PASSWORD', ''); 			//пароль
+define('PASSWORD', 'mysql'); 			//пароль
 define('NAME_BD', 'bdgm');		//база
 
+define('API_ID', '9607f96b-2fa0-ca34-7915-1a2489e0ff61');
 
 function __autoload($class_name){
 

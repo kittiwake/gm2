@@ -119,7 +119,7 @@
 }
 
 .content{
-    background-color: #f5a185;
+    background-color: rgba(248, 218, 110, 0.11);
     margin-top: 30px;
 }
 
@@ -159,7 +159,7 @@
     float: right;
     border: solid #f5a185;
 }
-#in_mount{
+#in_mount, #in_holiday{
     display: none;
 }
 .ass_row{
@@ -185,7 +185,7 @@
     margin: 20px;
 }
 .grafik #date{
-    background-color: saddlebrown;
+    background-color: peru;
     color: wheat;
     text-align: center;
 }
@@ -198,16 +198,17 @@
 }
 .grafik .cel{
     display: table-cell;
-    border:  solid saddlebrown;
+    border:  solid peru;
+    background-color: wheat;
     text-align: center;
 }
 .grafik .oneday table{
-    border: solid saddlebrown;
+    border: solid peru;
     border-collapse: collapse;
 }
 .grafik .oneday td{
-    border: solid saddlebrown;
-    background-color: wheat;
+    border: solid peru;
+    height: 37px;
 }
 .grafik .oneday td:nth-of-type(1){
     width: 10%;
@@ -360,4 +361,168 @@
 }
 h3{
     text-align: center;
+}
+/* oder.php */
+.stanzak{
+    float:left;
+    /*		background-color:#009900;*/
+    width:130px;
+    margin-top:70px;
+    padding-left:15px;
+}
+.odplandate{
+    text-align: center;
+    font-size: 32pt;
+    color: lightcyan;
+    text-shadow: 1px 1px 3px black, 0 0 6px blue;
+}
+#od {
+    margin-left:150px;
+    /*	background-color:#FFFF99;*/
+    width:inherit;
+}
+#od h3 {
+    text-align:center;
+    padding-bottom:10px;
+}
+#od h2 {
+    text-align:center;
+    padding-bottom:20px;
+}
+#od h2 strong{
+    color:#000033;
+    font-size:27px;
+    text-shadow: 1px 1px 2px #0033CC, 0 0 1em #FFFFCC;
+}
+#od .left{
+    /*background-color:#FFFF00;*/
+    margin-right:50%;
+}
+#od .right{
+    /*background-color:#CC66FF;*/
+    width:50%;
+    float:right;
+}
+#od .oderer{
+    /*	background-color:#CCCCFF;*/
+    padding:10px;
+}
+#od .oder{
+    /*background-color:#FFCCFF;*/
+    padding:10px;
+}
+#od .note{
+    /*background-color:#FFCCFF;*/
+    padding:10px;
+
+}
+#od .farm{
+    /*background-color:#CCCCFF;*/
+    padding:10px;
+
+}
+#formSms {
+    position: fixed;
+    width: 400px;
+    height: 300px;
+    align-content: center;
+    padding: 20px;
+    z-index: 2;
+    background-color: #FFFFFF;
+    display: none;
+}
+#answersms{
+    position: fixed;
+    width: 450px;
+    height: 80px;
+    top: 80px;
+    left: 200px;
+    background-color: #cefffc;
+    box-shadow: 0 0 20px rgba(40, 61, 164, 0.87); /* Параметры тени */
+}
+
+/*repaveturnover*/
+.aveturnover{
+    text-align: right;
+    margin-right: 30%;
+    margin-top: 40px;
+    font-size: 20px;
+}
+.turnover{
+    text-align: center;
+}
+.turnover table{
+
+    margin: auto;
+    border-collapse: collapse;
+}
+.turnover td, .turnover th{
+    border: 1px solid darkseagreen;
+    width: 90px;
+}
+.sum{
+    text-align: right;
+    padding-right: 20px;
+    width: 250px;
+
+}
+/*plantech*/
+.tech_table{
+    float: right;
+    display: table;
+    margin-right: 30px;
+}
+.day_row{
+    display: table-row;
+}
+
+.tech_cell{
+    display: table-cell;
+    border: solid 1px #f5a185;
+    text-align: center;
+    width: 105px;
+}
+.tech_date{
+    width: 70px;
+}
+
+.nametech{
+    display: table-cell;
+    text-align: center;
+    background-color: #f5a185;
+}
+.clone{
+    background-color: lightskyblue;
+}
+.planirovanie table{
+    width: 80%;
+    margin: auto;
+}
+
+/*claim*/
+.claim{
+    width: 50%;
+    margin: auto;
+}
+.claim table{
+    border: double salmon;
+    width: 100%;
+    border-spacing: 0px;
+}
+.claim th{
+    background-color: navajowhite;
+    border: none
+}
+.claim td{
+    border: solid 1px navajowhite;
+}
+.sum_order{
+    width: 25%;
+    text-align: center
+}
+.tech{
+    width: 40%;
+}
+.cont{
+    width: 15%;
 }

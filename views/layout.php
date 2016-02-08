@@ -7,6 +7,8 @@
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/calendar_ru.js"></script>
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/jquery-ui.js"></script>
+    <link type="text/css" href="/<?=SITE_DIR;?>/css/jquery-ui.css" rel="stylesheet" /></head>
 </head>
 
 <body>
@@ -17,7 +19,7 @@
 
     </div>
     <div id="hello">
-        Привет, <a href="/<?=SITE_DIR;?>/" onclick="killCookies();"><?=$log?></a>
+        Привет, <a href="/<?=SITE_DIR;?>/auth/showAuth" onclick="killCookies();"><?=$log?></a>
     </div>
 </div>
 
