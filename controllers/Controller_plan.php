@@ -61,4 +61,21 @@ class Controller_plan {
 
         return true;
     }
+
+    function actionCeh(){
+        $ri = $_COOKIE['ri'];
+        $log = $_COOKIE['login'];
+        if(!isset($ri)){
+            header('Location: /'.SITE_DIR.'/auth/showAuth');
+        }elseif($ri!=3 || $ri!=1){
+            header('Location: /'.SITE_DIR.'/schedule/orders');
+        }
+
+
+        $page = SITE_PATH.'views/planceh.php';
+        include (SITE_PATH.'views/layout.php');
+
+        return true;
+    }
+
 } 

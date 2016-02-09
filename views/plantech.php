@@ -1,4 +1,6 @@
 <div class="content">
+    <div id="korzina"></div>
+    <div id="korzina2"></div>
     <div class="planirovanie">
         <table>
             <tr>

@@ -246,39 +246,60 @@
 #fc{
     z-index: 3;
 }
-
-
-/*
-.assembly{
-    background-color: #ecffcf;
-    float: left;
+/*plantech*/
+.tech_table{
+    float: right;
     display: table;
-    width: 40%;
+    margin-right: 30px;
 }
-.to_plan{
-    display: table;
-    width: 45%;
-    padding-left: 20px;
-}
-.ass_table, .pl_table, .assd_table{
-    display: table;
-    width: 100%;
-}
-.ass_row, .assd_row, .pl_row{
+.day_row{
     display: table-row;
 }
-.ass_date, .ass_day, .ass_con, .pl_con{
+
+.tech_cell{
     display: table-cell;
+    border: solid 1px #f5a185;
+    text-align: center;
+    width: 105px;
 }
-.submit{
+.tech_date{
+    width: 70px;
+}
+
+.nametech{
+    display: table-cell;
+    text-align: center;
+    background-color: #f5a185;
+}
+.clone{
+    background-color: lightskyblue;
+}
+.planirovanie table{
+    width: 80%;
+    margin: auto;
+}
+.planirovanie table{
+    width: 80%;
+    margin: auto;
+}
+.planirovanie table th{
+    border: #FFE7D9;
+    text-align: left;
+    background-color: #FFE7D9;
+}
+#korzina {
     position: fixed;
-    right: 120px;
-    top: 120px;
+    width: 150px;
+    height: 150px;
+    background-color: #cbcbbb;
 }
-.submit input{
-    border:8px outset rgba(52, 152, 211, 0.71);
+#korzina2 {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    top: 200px;
+    background-color: #cbcbff;
 }
-*/
 
 
 /*repsb*/
@@ -465,38 +486,6 @@ h3{
     padding-right: 20px;
     width: 250px;
 
-}
-/*plantech*/
-.tech_table{
-    float: right;
-    display: table;
-    margin-right: 30px;
-}
-.day_row{
-    display: table-row;
-}
-
-.tech_cell{
-    display: table-cell;
-    border: solid 1px #f5a185;
-    text-align: center;
-    width: 105px;
-}
-.tech_date{
-    width: 70px;
-}
-
-.nametech{
-    display: table-cell;
-    text-align: center;
-    background-color: #f5a185;
-}
-.clone{
-    background-color: lightskyblue;
-}
-.planirovanie table{
-    width: 80%;
-    margin: auto;
 }
 
 /*claim*/

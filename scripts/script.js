@@ -337,55 +337,43 @@ function showChangeSum(boid){
 
 
 
-
-var start;
-var stop;
-var drag_oid;
-$('.oder_drag').draggable({
-    stack: ".elem", //делает максимальный z-индекс
-    cursorAt:{cursor:"move", top:3, left:10},
-    revert:"invalid", // перетаскиваемый элемент будет возвращен на прежнюю позицию, если он был "сброшен" не на Droppable-элемент
-    connectToSortable:".tech_cell",
-    start: function (event, ui){
-        start = $(this).offset();
-        drag_oid = $(this).attr('id');
-    },
-    stop: function(event, ui){
-    /*    stop = $(this).offset();
-        if(start.left != stop.left || start.top != stop.top){
-            var oid =$(this).attr('id');
-            var text = $(this).text();
-            $('#td'+oid).html('<div class="clone" id="cl'+oid+'">'+text+'</div>');
-            alert(start.top);
-            alert(stop.top);
-        }*/
-        stop = $(this).offset();
-        var toplen = start.top - stop.top;
-        var leftlen = start.left - stop.left;
-        if((toplen<-1||toplen>1)||(leftlen<-1||leftlen>1)){
-            var oid =$(this).attr('id');
-            var text = $(this).text();
-            $('#td'+oid).html('<div class="clone" id="cl'+oid+'">'+text+'</div>');
-        }
-    }
+var domid = '';
+$('.oder_drag').click(function(){
+    var drag_id = $(this).attr('id');
+    ($(this).clone().attr('class','clone').removeAttr('id')).appendTo($('#td'+drag_id).empty());
+    $('#korzina').empty().append($(this));
+    $(this).attr('class','drg');
 });
-$('.oder_drag_gr').draggable({
-    connectToSortable:".tech_cell",
-    start: function (event, ui){
-        drag_oid = $(this).attr('id');
+
+function changeTech(oid, domid){
+    $.ajax({
+        type: "POST",
+        url: '/' + dir + '/plan/changeTech',
+        data: "oid=" + oid + "&table=" + domid
+    });
+}
+
+$('.tech_cell').click(function(){
+    var newdom = $(this).attr('id');//номер технолога и дата
+    if($('#korzina').text()!='') {
+        var oid = $('.drg').attr('id');
+        $(this).append($('.drg').attr('class', 'oder_drag_gr'));
+        changeTech(oid, newdom);
+    }else if($('#korzina2').text()!='' && newdom!=domid) {
+        var oid = $('.drg2').attr('id');
+        $(this).append($('.drg2').attr('class', 'oder_drag_gr'));
+        changeTech(oid, newdom);
     }
 });
 
-$('.tech_cell').droppable({
-    drop:function(event, ui){
-        var tech_date = $(this).attr('id');
-        $.ajax({
-            type: "POST",
-            url: '/' + dir + '/plan/changeTech/',
-            data: "oid="+drag_oid+"&table="+tech_date
-        })
+
+$('.oder_drag_gr').on('click', function(){
+    if($('#korzina').text()==''){
+        domid = $(this).parent().attr('id');
+        $('#korzina2').append($(this));
+        $(this).attr('class','drg2');
     }
-}).sortable({
-    revert: true
 });
+
+
 
