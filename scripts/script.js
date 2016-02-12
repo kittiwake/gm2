@@ -353,6 +353,14 @@ function changeTech(oid, domid){
     });
 }
 
+function closeTech(oid){
+    $.ajax({
+        type: "POST",
+        url: '/' + dir + '/technologist/closeTech',
+        data: "oid=" + oid
+    });
+}
+
 $('.tech_cell').click(function(){
     var newdom = $(this).attr('id');//номер технолога и дата
     if($('#korzina').text()!='') {

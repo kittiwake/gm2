@@ -74,29 +74,34 @@ AND `sborka_end_date`>= (CURDATE( ) - INTERVAL 1 MONTH ) ');
         while ($row = $res->fetch()){
             $orderList[$row['oid']] = $row;
         }
-
         return $orderList;
-
     }
 
-    public static function getTechEnd($tech, $begindate, $enddate){
+    public static function getTechEnd($tech){
 
         $db = Db::getConection();
 
         $orderList = array();
 
         $res = $db->prepare('
-SELECT *
+SELECT `oid`, `contract`, `sum`, `tech_date`
 FROM `order_stan`,`orders`
 WHERE `order_stan`.`oid` = `orders`.`id`
 AND  `tech_end` = \'2\'
 AND `technologist` = :val2
-AND `tech_date`>= :begindate
-AND `tech_date`<= :enddate
+AND (
+  (
+    MONTH(`tech_date`) = MONTH(CURRENT_DATE)
+    AND YEAR(`tech_date`) = YEAR(CURRENT_DATE)
+  )
+  OR (
+    MONTH(`tech_date`) = MONTH(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH))
+    AND YEAR(`tech_date`) = YEAR(DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH))
+  )
+)
+ORDER BY `tech_date` DESC
 ');
         $res->execute(array(
-            ':begindate'=>$begindate,
-            ':enddate'=>$enddate,
             ':val2'=>$tech
         ));
         $res->setFetchMode(PDO::FETCH_ASSOC);
@@ -104,10 +109,35 @@ AND `tech_date`<= :enddate
         while ($row = $res->fetch()){
             $orderList[$row['oid']] = $row;
         }
-
         return $orderList;
-
     }
+
+    public static function getTechNotEnd($tech){
+
+        $db = Db::getConection();
+
+        $orderList = array();
+
+        $res = $db->prepare('
+SELECT `oid`, `contract`, `sum`, `tech_date`
+FROM `order_stan`,`orders`
+WHERE `order_stan`.`oid` = `orders`.`id`
+AND  `tech_end` = \'0\'
+AND `tech_date` != \'0000-00-00\'
+AND `technologist` = :val2
+ORDER BY `tech_date` DESC
+');
+        $res->execute(array(
+            ':val2'=>$tech
+        ));
+        $res->setFetchMode(PDO::FETCH_ASSOC);
+
+        while ($row = $res->fetch()){
+            $orderList[$row['tech_date']][] = $row;
+        }
+        return $orderList;
+    }
+
 
     public static function getNeSobr($coll){
 
