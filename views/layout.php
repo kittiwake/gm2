@@ -4,6 +4,7 @@
 <head>
     <title>Галерея Мебели</title>
     <link rel="stylesheet" href="/<?=SITE_DIR;?>/css/style.css" title="normal" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/<?=SITE_DIR;?>/css/new.css" title="normal" type="text/css" media="screen" />
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/calendar_ru.js"></script>
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="/<?=SITE_DIR;?>/scripts/jquery.cookie.js"></script>

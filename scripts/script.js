@@ -286,7 +286,6 @@ $(".stan").click(function(event) {
     if (val=='2') {var nval = 0}
     else {nval = parseInt(val, 10) + 1}
     if(ri == 3 || ri == 4 || ri == 1){
-
         $.ajax({
             type: "POST",
             url: '/' + dir + '/order/changeStan/',
@@ -357,7 +356,10 @@ function closeTech(oid){
     $.ajax({
         type: "POST",
         url: '/' + dir + '/technologist/closeTech',
-        data: "oid=" + oid
+        data: "oid=" + oid,
+        success: function(data){
+            $('#'+oid).parent().html('В_работе');
+        }
     });
 }
 
@@ -383,5 +385,57 @@ $('.oder_drag_gr').on('click', function(){
     }
 });
 
+$('.span3').click(function(){
+    $('.span3').removeClass('select-span');
+    $(this).addClass('select-span');
+    var stanid = $(this).attr('id');
+    $('#pole').val(stanid);
+    $('.for_plan').each(function(){
+        var domid = $(this).attr('id');
+        var oid = domid.split('-')[0];
+        var stan = domid.split('-')[1];
+        var red = stan.charAt(stanid);
+        if(red == 0){
+            $(this).css({'background-color':'#9BC0FF', 'color':'black'});
+            $(this).addClass('plan-active');
+            $(this).removeClass('plan-passive');
+        }
+        if(red == 1){
+            $(this).css({'background-color':'gainsboro', 'color':'grey'});
+            $(this).addClass('plan-passive');
+            $(this).removeClass('plan-active');
+        }
+        if(red == 2){
+            $(this).css({'background-color':'palegreen', 'color':'grey'});
+            $(this).addClass('plan-passive');
+            $(this).removeClass('plan-active');
+        }
+    });
+});
 
+
+
+$('.for_plan').click(function(){
+    if($(this).hasClass('plan-active')){
+       // alert($(this).attr('id'));
+        var pole = $('#pole').val();
+        var domid = $(this).attr('id');
+        var oid = domid.split('-')[0];
+        var datec = $('#date').html();
+        $.ajax({
+            type: "POST",
+            url: '/' + dir + '/plan/changeDateStan',
+            data: "oid=" + oid + "&pole=" + pole + "&date=" + datec,
+            success: function(data){
+                if(data == 1){
+                    ($('#'+domid).clone().removeClass().removeAttr('id')).appendTo('#'+pole);
+                }else if(/(\d{4})-(\d{2})-(\d{2})/.test(data)){
+                    alert('Уже в планах на '+data);
+                }else{
+                    alert('Где-то ошибка! =(');
+                }
+            }
+        });
+    }
+});
 

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kittiwake
- * Date: 04.11.2015
- * Time: 16:48
- */
 
 class OrderStan {
 
@@ -51,6 +45,62 @@ class OrderStan {
         return $orderList;
 
     }
+
+    public static function getNeVipoln($pole_date,$pole_end){
+
+        $db = Db::getConection();
+
+        $orderList = array();
+
+        $res = $db->prepare('
+SELECT *
+FROM `order_stan`
+WHERE `'.$pole_date.'` < CURRENT_DATE
+AND `'.$pole_date.'` != \'0000-00-00\'
+AND `'.$pole_end.'`=\'0\'
+AND `otgruz_end`!=\'2\'
+');
+        $res->execute();
+        $res->setFetchMode(PDO::FETCH_ASSOC);
+
+        while ($row = $res->fetch()){
+            $orderList[$row['oid']] = $row;
+   //         $orderList[$i]['plan'] = $row['plan'];
+        }
+
+        return $orderList;
+
+    }
+
+public static function getStanString($oid){
+
+    $db = Db::getConection();
+
+    $res = $db->prepare('
+SELECT CONCAT(
+    `raspil`,
+    `cpu`,
+    `gnutje`,
+    `kromka`,
+    `pris_end`,
+    `emal`,
+    `pvh`,
+    `photo`,
+    `pesok`,
+    `vitrag`,
+    `oracal`,
+    `fas`,
+    `upak_end`
+) AS `stan`
+FROM `order_stan`
+WHERE `oid` = :val
+');
+    $res->execute(array(':val'=>$oid));
+    $res->setFetchMode(PDO::FETCH_ASSOC);
+
+    return $res->fetch();
+
+}
 
     public static function getSobr($sbend,$coll){
 

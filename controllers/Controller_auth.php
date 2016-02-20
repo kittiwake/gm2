@@ -27,9 +27,9 @@ class Controller_auth {
                       $this->actionShowAuth();
                   }else{
                       $hash = Datas::generateCode(20);
-                      Users::updateUsersByParam('user_hash',$hash,$res[0]['id']);
-                      setcookie("hash", $hash, time()+60*60*13);
-                      setcookie("uid", $res[0]['id'], time()+60*60*13);
+                      Users::updateUsersByParam('user_hash', $hash, $res[0]['id']);
+                      setcookie("hash", $hash);
+                      setcookie("uid", $res[0]['id']);
                       header('Location: /'.SITE_DIR.'/');
                   }
               }

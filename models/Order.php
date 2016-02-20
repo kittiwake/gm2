@@ -45,6 +45,35 @@ class Order {
 
     }
 
+    public static function getOrdersFromToday(){
+
+        $db = Db::getConection();
+
+        $orderList = array();
+
+        $res = $db->prepare('
+              SELECT `contract`,`oid`,`plan`
+			  FROM `orders`, `order_stan`
+			  WHERE `orders`.`id` = `order_stan`.`oid`
+			  AND `order_stan`.`plan` >= CURDATE()
+			  ');
+        $res->execute();
+        $res->setFetchMode(PDO::FETCH_ASSOC);
+
+        $today = strtotime('today');
+        while ($row = $res->fetch()){
+            $date = strtotime($row['plan']);
+            $daysdiff = ($date - $today)/60/60/24;
+            $orderList[$daysdiff][] = array(
+                'oid' => $row['oid'],
+                'con' => $row['contract']
+            );
+        }
+
+        return $orderList;
+
+    }
+
     public static function getOrdersLikeParam($param, $val){
 
         $db = Db::getConection();
@@ -143,7 +172,7 @@ VALUES (:contract, :contract_date, :name, :product, :adress, :phone, CURDATE(), 
     public static function updateOrdersByParam($pole, $val, $oid){
 
         $db = Db::getConection();
-
+        
         $res = $db->prepare('UPDATE `orders` SET `' . $pole . '`=:val WHERE `id`=:oid');
         $answer = $res->execute(array(
             ':val'=>$val,
@@ -169,7 +198,6 @@ AND `order_stan`.`plan`< DATE_ADD(\'2014-07-01\',INTERVAL :n2 MONTH)
             ':n1'=> $n,
             ':n2'=>  $n+1
     ));
-
         return $res->fetch();
     }
 

@@ -4,18 +4,15 @@ class Controller_index
 
     function actionIndex()
     {
-      //  var_dump($_COOKIE);
-      //  setcookie("uid", "", time()-60*60*24);
-      //  die;
         if(!isset ($_COOKIE['uid']) || !isset($_COOKIE['hash'])){
             header('Location: /'.SITE_DIR.'/auth/showAuth');
         }else{
-            $user = Users::getUsersByParam('id',$_COOKIE['uid']);
+            $user = Users::getUsersByParam('id', $_COOKIE['uid']);
             if($user[0]['user_hash'] == $_COOKIE['hash']){
                 $ri = $user[0]['user_right'];
                 $log = $user[0]['user_login'];
-                setcookie("ri", $ri, time()+60*60*24);
-                setcookie("login", $log, time()+60*60*24);
+                setcookie("ri", $ri);
+                setcookie("login", $log);
 
                 //генерируем меню в виде layout
 

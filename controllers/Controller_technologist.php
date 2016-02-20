@@ -9,7 +9,7 @@ class Controller_technologist {
             header('Location: /'.SITE_DIR.'/auth/showAuth');
         }
         $user = $_COOKIE['uid'];
-        $user = 15;
+     //   $user = 15;
 
  /*       if($ri!=6 && $ri!=7 && $ri!=1){
             header('Location: /'.SITE_DIR.'/schedule');
@@ -79,8 +79,10 @@ class Controller_technologist {
         $oid = $_POST['oid'];
         $today = date('Y-m-d', strtotime('today'));
 
-        OrderStan::updateStanByParam('tech_date', $today, $oid);
-        OrderStan::updateStanByParam('tech_end', '2', $oid);
+        $res1 = OrderStan::updateStanByParam('tech_date', $today, $oid);
+        $res2 = OrderStan::updateStanByParam('tech_end', '2', $oid);
+
+        echo $res1 && $res2;
 
         return true;
     }

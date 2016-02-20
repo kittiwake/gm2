@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kittiwake
- * Date: 10.12.2015
- * Time: 12:28
- */
 
 class Menu {
 
@@ -30,6 +24,7 @@ class Menu {
 
         $menu .= '<li><a href="#">Планирование</a><ul>';
         if(in_array($ri,array(1,7))) $menu .= '<li><a href="/'.SITE_DIR.'/plan/tech">Технологи</a></li>';
+        if(in_array($ri,array(1,3))) $menu .= '<li><a href="/'.SITE_DIR.'/plan/ceh">Цеха</a></li>';
         $menu .= '</ul></li>';
 
         $menu .= '<li><a href="#">Отчеты</a><ul>';
