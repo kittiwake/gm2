@@ -3,16 +3,19 @@
 class Controller_technologist {
 
     function actionSchedule(){
-        $ri = $_COOKIE['ri'];
-        $log = $_COOKIE['login'];
-        if(!isset($ri)){
-            header('Location: /'.SITE_DIR.'/auth/showAuth');
+        $ri = $_SESSION['ri'];
+        $log = $_SESSION['login'];
+        $user = $_SESSION['uid'];
+
+        $allowed = array(1,6,7,21);
+        if(!in_array($ri,$allowed)){
+            die("Нет доступа к этой странице!");
         }
-        $user = $_COOKIE['uid'];
-     //   $user = 15;
+
+        //   $user = 15;
 
  /*       if($ri!=6 && $ri!=7 && $ri!=1){
-            header('Location: /'.SITE_DIR.'/schedule');
+            header('Location: /schedule');
         }*/
 
         //выбрать заказы несчитанные
@@ -21,11 +24,21 @@ class Controller_technologist {
         foreach($order_current as $key=>$order){
             if(strtotime($key)<strtotime('today')){
                 foreach($order as $ord_one){
+                    $path = Datas::getPathFromYear($ord_one['plan'],$ord_one['contract']);
+                    $ord_one['path'] = $path;
                     $order_overdue[]=$ord_one;
                 }
                 unset ($order_current[$key]);
+            }else{
+                foreach($order as $i=>$ord_one){
+                    $path = Datas::getPathFromYear($ord_one['plan'],$ord_one['contract']);
+                    $order_current[$key][$i]['path'] = $path;
+                }
             }
         }
+//        var_dump($order_current);
+//        var_dump($order_overdue);
+//        die;
    //     var_dump($order_current); die;
         //заказы закрытые за последний и текущий месяц
         $order_end = array();
@@ -67,7 +80,11 @@ class Controller_technologist {
                 $count_order[$month_of_year[$mbd]] ++;
             }
         }
+        //список сборщиков и дизайнеров с номерами телефонов
+        $disList = Users::getUserByPost(5);
+        $colList = Users::getUserByPost(17);
 
+        $script = '<script type="text/javascript" src="/scripts/technologist.js"></script>';
         $page = SITE_PATH.'views/technologist.php';
         include (SITE_PATH.'views/layout.php');
 
@@ -76,13 +93,18 @@ class Controller_technologist {
 
     function actionCloseTech(){
 
-        $oid = $_POST['oid'];
+        $oid = $_GET['oid'];
+        $weight = $_GET['weight'];
         $today = date('Y-m-d', strtotime('today'));
 
         $res1 = OrderStan::updateStanByParam('tech_date', $today, $oid);
         $res2 = OrderStan::updateStanByParam('tech_end', '2', $oid);
+        $res3 = OrderStan::updateStanByParam('weight', $weight, $oid);
 
-        echo $res1 && $res2;
+        if($res1 && $res2 && $res3){
+            header('Location: /technologist/schedule');
+
+        };
 
         return true;
     }

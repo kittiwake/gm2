@@ -30,7 +30,7 @@ class Controller_auth {
                       Users::updateUsersByParam('user_hash', $hash, $res[0]['id']);
                       setcookie("hash", $hash);
                       setcookie("uid", $res[0]['id']);
-                      header('Location: /'.SITE_DIR.'/');
+                      header('Location: /');
                   }
               }
         return true;
