@@ -1,0 +1,26 @@
+.content_ceh{
+    width: 1024px;
+    margin: auto;
+
+}
+.content_ceh .span3{
+    font: 2em Impact,Charcoal, sans-serif;
+    color: darkslateblue;
+    line-height: 1.6em;
+    text-align: center;
+    width: 22%;
+}
+.content_ceh .span_zagol{
+    font: 0.7em Arial, Helvetica, sans-serif;
+    color: darkmagenta;
+}
+.content_ceh .one_from_list{
+    margin: 2px;
+    border: 2px mediumaquamarine solid;
+}
+.mater{
+    float: right;
+    background-color: #00a88c;
+    font-size: 0.7em;
+    color: lavender;
+}

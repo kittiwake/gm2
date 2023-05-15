@@ -1,0 +1,87 @@
+.content_main{
+    background-color: white;
+}
+.span_zagol{
+    font-size: 2em;
+    text-align: center;
+}
+.log_cont{
+    text-align: center;
+    margin-top: 10px;
+    background-color: papayawhip;
+}
+.log_cont:nth-child(odd){
+    background-color: honeydew;
+}
+.log_cont table{
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+    border: 4px solid lightsalmon;
+}
+.log_cont:nth-child(odd) table{
+    border-color: mediumaquamarine;
+}
+.log_cont tr:first-child{
+    background-color: navajowhite;
+}
+.autopoint{
+    background-color: #ffe7c1;
+}
+.log_cont:nth-child(odd) tr:first-child{
+    background-color: aquamarine;
+}
+.log_cont td, .log_cont th{
+    border: 2px solid lightsalmon;
+}
+.log_cont:nth-child(odd) td,.log_cont:nth-child(odd) th{
+    border-color: mediumaquamarine;
+}
+.log_cont img{
+    height: 22px;
+    border-radius: 11px;
+}
+.content_main a:link, .content_main a:visited{
+    text-decoration: none;
+    color: darkslateblue;
+    font-weight: bold;
+}
+.span_zagol{
+    position: relative;
+}
+#today{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+
+}
+#today a:link, #today a:visited{
+    font-weight: normal;
+    color: gray;
+    font-size: 18px;
+}
+.form{
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+#form1, #form2{
+    width: 400px;
+    height: 300px;
+    padding-top: 20px;
+}
+#form1 h6{
+    font-weight: normal;
+}
+.bold{
+    font-weight: bold;
+    color: darkred;
+    font-size: 1.2em;
+    text-align: right;
+}
+.log_cont div{
+    padding-top: 8px;
+    color: darkgreen;
+}

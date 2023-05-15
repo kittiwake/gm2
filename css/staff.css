@@ -1,0 +1,55 @@
+.form{
+    width: 400px;
+    top: 100px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: left;
+}
+.ui-autocomplete{
+    max-height: 150px;
+    width: 280px;
+    overflow-y: auto;
+    /* отменим горизонтальный скролл */
+    overflow-x: hidden;
+    /* добавим padding для учета вертикального скролла */
+    padding-right: 20px;
+}
+/* В IE 6 не определено свойство max-height
+*  поэтому для него лучше установим постоянную высоту.
+*/
+* html .ui-autocomplete{
+    height: 150px;
+}
+.form input{
+    margin-left: 30px;
+    margin-top: 10px;
+}
+#form_del{
+    height: 300px;
+    overflow-y: auto;
+    /* отменим горизонтальный скролл */
+    overflow-x: hidden;
+    line-height: 0.5
+}
+#form_del button{
+    float: right;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+.content ul{
+    float: left;
+    line-height: 2;
+    color: lavenderblush;
+    background-color: darkcyan;
+    width: 50%;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+.content li{
+    list-style-type: none;
+    font-size: 0.85em;
+    color: darkcyan;
+    background-color: lavender;
+}

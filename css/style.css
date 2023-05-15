@@ -58,6 +58,7 @@
     top: 0px;
     display:table;
     width: 100%;
+    z-index: 20;
 }
 #hello{
     width: 170px;
@@ -90,6 +91,7 @@
     float:left;
     margin-right:-129px;
     margin-top:10000px;
+    z-index: 30;
 }
 #nav li a:hover, #content #nav li a:focus, #content #nav li a:active {
     background:#797466;
@@ -103,8 +105,11 @@
     padding-top:25px;
     margin-bottom:-10000px;
     list-style-type:none;
+
 }
 #nav li ul li {
+    position: relative;
+    z-index: 40;
     float:none;
     margin:0;
     width:auto;
@@ -117,12 +122,125 @@
     background:#BFBCB5;
 }
 
+/*------------------------------------*\*/
+/*НАВИГАЦИЯ*/
+/*\*------------------------------------*/
+/*#nav{*/
+/*float:left;*/
+/*width:100%;*/
+/*list-style:none;*/
+/*     font-weight:bold; */
+/*margin-bottom:10px;*/
+/*background: #9FD2D7;*/
+/*}*/
+/*#nav li{*/
+/*float:left;*/
+/*margin-right:10px;*/
+/*position:relative;*/
+/*display:block;*/
+/*}*/
+/*#nav li a{*/
+/*display:block;*/
+/*padding:5px;*/
+/*color:#3A3732;*/
+/*     background:#333; */
+/*text-decoration:none;*/
+
+/*     text-shadow:1px 1px 1px rgba(0,0,0,0.75); *//* Тень текста, чтобы приподнять его на немного */
+/*     -moz-border-radius:2px; */
+/*     -webkit-border-radius:2px; */
+/*     border-radius:2px; */
+/*}*/
+/*#nav li a:hover{*/
+/*     color:#fff; */
+/*     background:#6b0c36; */
+/*     background:rgba(107,12,54,0.75); *//* Выглядит полупрозрачным */
+/*     text-decoration:underline; */
+/*background: #797466;*/
+/*margin-right:0;*/
+/*color:#fff;*/
+/*}*/
+
+/*--- ВЫПАДАЮЩИЕ ПУНКТЫ ---*/
+/*#nav ul{*/
+/*list-style:none;*/
+/*position:absolute;*/
+/*background-color: #A39E92;*/
+/*left:-9999px; *//* Скрываем за экраном, когда не нужно (данный метод лучше, чем display:none;) */
+/*opacity:0; *//* Устанавливаем начальное состояние прозрачности */
+/*-webkit-transition:0.25s linear opacity; *//* В Webkit выпадающие пункты будут проявляться */
+/*}*/
+/*#nav ul li{*/
+/*     padding-top:1px; *//* Вводим отступ между li чтобы создать иллюзию разделенных пунктов меню */
+/*float:none;*/
+/*}*/
+/*#nav ul a{*/
+/*white-space:nowrap; *//* Останавливаем перенос текста и создаем многострочный выпадающий пункт */
+/*display:block;*/
+/*background-color: #A39E92;*/
+/*}*/
+/*#nav li:hover ul{ *//* Выводим выпадающий пункт при наведении курсора */
+/*left:0; *//* Приносим его обратно на экран, когда нужно */
+/*opacity:1; *//* Делаем непрозрачным */
+/*}*/
+/*#nav li:hover a{ *//* Устанавливаем стили для верхнего уровня, когда выводится выпадающий список */
+/*background:#797466;*/
+/*background:#BFBCB5;*/
+/*background:rgba(107,12,54,0.75); *//**//* Выглядит полупрозрачным */
+/*     text-decoration:underline; */
+/*}*/
+/*#nav li:hover ul a{ *//* Изменяем некоторые стили верхнего уровня при выводе выпадающего пункта */
+/*text-decoration:none;*/
+/*-webkit-transition:-webkit-transform 0.075s linear;*/
+/*}*/
+/*#nav li:hover ul li a:hover{ *//* Устанавливаем стили для выпадающих пунктов, когда курсор наводится на конкретный пункт */
+/*background:#BFBCB5;*/
+/*background:#797466;*/
+/*background:rgba(51,51,51,0.75); *//**//* Будет полупрозрачным */
+/*     text-decoration:underline; */
+/*-moz-transform:scale(1.05);*/
+/*-webkit-transform:scale(1.05);*/
+/*}*/
+
+
+
 .content{
     background-color: rgba(248, 218, 110, 0.11);
     margin-top: 30px;
 }
-
-/*план вывоза*/
+.leftmenu{
+    background-color: #ccc;
+    width: 45px;
+    height: 100%;
+    position: fixed;
+    padding-top: 30px;
+}
+.imgmenu{
+    border-radius: 22px;
+    margin: 10px 0;
+}
+.podmenu{
+    background-color: #ddd;
+    position: fixed;
+    top: 30px;
+    left: 50px;
+    width: 100%
+}
+.menuimg{
+    position: relative;
+}
+.signal{
+    background-color: #cf0e11;
+    position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+    width: 1.4em;
+    height: 1.4em;
+    border-radius: 0.7em;
+    text-align: center;
+    color: white;
+}/*план вывоза*/
 .rad{
     border-radius: 8px;
     /*   float: right;*/
@@ -142,15 +260,32 @@
     text-align: center;
     width: 46%;
 }
+.cont a{
+    text-decoration: none;
+}
+.cont a:visited { 
+   text-decoration: none; 
+} 
+.cont a:active { 
+   text-decoration: none; 
+}
+.cont a:hover {
+    text-decoration: none; 
+} 
 .plandate {
     text-align: left !important;
 }
 .summa {
     text-align: right !important;/*устанавливает приоритет*/
 }
-/*assembly*/
+/*assembly, табл дизайнеров*/
 .grafik{
     width: 70%;
+}
+.plan_dis{
+    width: 96%;
+    margin: auto;
+    margin-top: 60px;
 }
 .planirovanie{
     width: 30%;
@@ -164,12 +299,36 @@
 .ass_row{
     display: table-row;
 }
-.ass_cell{
+.ass_cell, .dis_cell{
     display: table-cell;
     width: 180px;
     border: floralwhite solid;
     background-color: darksalmon;
     text-align: center;
+}
+.dis_cell{
+    width: 250px;
+    background-color: #fff;
+}
+.in_contacts, .in_holiday{
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+}
+.in_holiday .content_main{
+    margin-top: 20px;
+}
+.menu_rel{
+    width: 90%;
+    margin: auto;
+    height: 1px;
+}
+.menu{
+    width: 140px;
+    text-align: center;
+    margin: 2px 4px;
+    font-size: 1.5em;
+    float: left;
 }
 .active{
     background-color: saddlebrown;
@@ -183,10 +342,22 @@
     width: 90%;
     margin: 20px;
 }
-.grafik #date{
+.grafik .date{
     background-color: peru;
     color: wheat;
     text-align: center;
+}
+.free{
+    position: absolute;
+    right: 40px;
+    display: none;
+    font-size: 1.3em;
+    width: 30%;
+    padding-left: 20px;
+    background-color: #f5a185;
+}
+.free .list_user{
+    font-size: 0.8em;
 }
 .grafik .coll_list{
     display: table;
@@ -204,6 +375,7 @@
 .grafik .oneday table{
     border: solid peru;
     border-collapse: collapse;
+    width: 100%;
 }
 .grafik .oneday td{
     border: solid peru;
@@ -212,10 +384,14 @@
 .grafik .oneday td:nth-of-type(1){
     width: 10%;
 }
-.grafik .oneday td:nth-of-type(3){
-    width: 12%;
+.grafik .oneday td:nth-of-type(2){
+    width: 10%;
 }
 .grafik .oneday td:nth-of-type(4){
+    width: 17%;
+    text-align: right;
+}
+.grafik .oneday td:nth-of-type(5){
     width: 9%;
 }
 #fon{
@@ -229,7 +405,7 @@
     background-color: #000000;
     display: none;
 }
-#form {
+.form {
     position: fixed;
     width: 300px;
     height: 200px;
@@ -242,8 +418,22 @@
     background-color: #FFFFFF;
     display: none;
 }
+#form3{
+    height: 400px;
+    text-align: left;
+    padding-left: 60px;
+    padding-top: 20px;
+}
 #fc{
-    z-index: 3;
+    z-index: 300;
+}
+.hidden{
+    display: none;
+}
+.m_note{
+    text-align: left;
+    background-color: aliceblue;
+    padding-left: 5px;
 }
 /*plantech*/
 .tech_table{
@@ -260,6 +450,7 @@
     border: solid 1px #f5a185;
     text-align: center;
     width: 105px;
+    padding-bottom: 30px;
 }
 .tech_date{
     width: 70px;
@@ -288,16 +479,17 @@
 }
 #korzina {
     position: fixed;
-    top: 150px;
+    bottom: 10px;
     width: 150px;
-    height: 150px;
+    height: 50px;
     background-color: #cbcbbb;
 }
 #korzina2 {
     position: fixed;
     width: 150px;
-    height: 150px;
-    top: 350px;
+    height: 50px;
+    bottom: 10px;
+    left: 250px;
     background-color: #cbcbff;
 }
 
@@ -364,29 +556,81 @@
 .table-left td{
     background-color: ghostwhite;
 }
+.imgs{
+    width: 90%;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.imgs img{
+    height: 100px;
+    border: 2px double #fad2c7;
+}
+.imgs_dis img{
+    height: 400px;
+}
+.clearfix{
+    box-sizing: border-box;
+    clear: both;
+    height: 50px;
+}
 
 /*collector*/
-.col_center{
+.navig{
+    height: 33px;
+    position: relative;
+    left: 20%;
 }
-.col_left{
-    background-color: rgba(255, 255, 0, 0.65);
-    width: 270px;
+.nav{
+    background-color: rosybrown;
+    width: 200px;
+    border: solid darkmagenta 4px;
     float: left;
-
+    margin-left: 4px;
+    text-align: center;
+    font-size: 20px;
 }
-.col_right{
-    background-color: rgba(73, 255, 147, 0.69);
-    width: 280px;
-    float: right;
+.active_nav{
+    border: groove darkmagenta 4px;
+    color: darkmagenta;
 }
-h3{
+.content_orders{
+    display: none;
+}
+.first_table{
+    display: block;
+}
+.content_orders table{
+    width: 90%;
+    margin: auto;
+}
+.second_table table{
+    width: 70%;
+    margin: auto;
+}
+.content_orders table{
+    border-spacing: 0px;
+    margin: 10px auto;
+}
+.content_orders td, th{
+    border: sandybrown solid 2px;
+}
+.content_orders th{
+    background-color: sandybrown
+}
+.content_orders td:first-child, .content_orders td:nth-child(2) {
+    width: 80px;
     text-align: center;
 }
+.content_orders td:last-child{
+    width: 120px;
+    text-align: center;
+}
+
 /* oder.php */
 .stanzak{
     float:left;
     /*		background-color:#009900;*/
-    width:130px;
+    width:180px;
     margin-top:70px;
     padding-left:15px;
 }
@@ -441,7 +685,36 @@ h3{
     padding:10px;
 
 }
-#formSms {
+.delete{
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    width: 80px;
+    background-color: #000033;
+    border-radius: 10px;
+    text-align: center;
+    color: #FFE7D9;
+}
+.archive{
+    position: absolute;
+    top: 50px;
+    right: 140px;
+    width: 80px;
+    background-color: #000033;
+    border-radius: 10px;
+    text-align: center;
+    color: #FFE7D9;
+}
+.attention{
+    width: 180px;
+    height: 35px;
+    background-color: #f06c6c;
+    border-radius: 10px;
+    text-align: center;
+    color: #772C00;
+
+}
+#formSms, #formnewsum,  #formOperate, #formEmail{
     position: fixed;
     width: 400px;
     height: 300px;
@@ -511,9 +784,6 @@ h3{
 .tech{
     width: 40%;
 }
-.cont{
-    width: 15%;
-}
 
 /*страница технолога*/
 .content_main {
@@ -539,6 +809,10 @@ h3{
     width: 90%;
     margin: auto;
 }
+.dispan1 div{
+    width:50%;
+    padding-left: 20px;
+}
 .span1 .one_month{
     background-color: bisque;
     padding: 8px 0px;
@@ -553,27 +827,68 @@ h3{
     margin-top: 20px;
     font:  18px sans-serif;
 }
+.grafik_dis{
+    width: 100%;
+}
 .span2 table{
     border-spacing: 0px;
     width: 70%;
     margin: auto;
 }
+.dispan2 table{
+    width: 96%;
+    table-layout: fixed;
+    word-wrap: break-word; /* Перенос слов */
+}
 .span2 td, th{
     border: sandybrown solid 2px;
 }
+
 .span2 th{
     background-color: sandybrown
 }
-.span2 td div{
+.dispan2 th:first-child{
+    min-width: 50px;
+    width: 10%;
+}
+.dispan2 th:nth-child(2){
+    min-width: 70px;
+    width: 12%;
+}
+.dispan2 th:nth-child(5){
+    min-width: 60px;
+    width: 12%;
+}
+.dispan2 th:nth-child(6){
+    min-width: 60px;
+    width: 12%;
+}
+.dispan2 td>input{
+    width: 100%;
+    height: 40px;
+    white-space: pre-line;
+}
+.span2 td>div{
     border: 0;
     width: 80%;
     margin: auto;
+
 }
 .span2 p{
     text-align: center;
     margin: 15px 0px;
     font: italic bold 22px sans-serif;
     color: darkred;
+}
+.notedis p{
+    font: inherit;
+    color: black;
+}
+.phone_list{
+    width: 100%;
+}
+.lists{
+    display: none;
 }
 /*planceh*/
 .plc_date{
@@ -611,7 +926,7 @@ h3{
     overflow: hidden;
     min-height: 200px;
 }
-.span3{
+.span3, .span33{
     width: 14%;
     float: left;
     min-height: 200px;
@@ -620,7 +935,7 @@ h3{
     background-color: #ffe9f3;
 }
 .plc_oned{
-    width: 150px;
+    width: 10%;
     height: 100%;
     float: left;
     background-color: ghostwhite;
@@ -635,8 +950,315 @@ h3{
 .select-span{
     border: outset 7px #ff66a8;
 }
-
 .plan-active:hover{
     cursor: pointer;
     border: 1px solid #359bff;
+}
+.elem_list{
+    margin-left: 20px;
+    margin-top: 20px;
+    position: relative;
+}
+.mirror{
+    transform: scale(-1, 1);
+}
+/*стр дизайнера*/
+.span1 .dis_cont{
+    width: 45%;
+    float: right;
+}
+.span1 .dis{
+    border: 0px;
+}
+
+/*отчеты*/
+.columns{
+    display: flex;
+}
+.one_tech {
+    width: 400px;
+}
+.rep_claim{
+    width: 700px;
+}
+.rep_sms, .statistic{
+    width: 960px;
+}
+.one_tech, .rep_claim, .rep_sms, .rep_np, .statistic{
+    margin: 8px auto;
+    background-color: honeydew;
+    border: inset royalblue;
+}
+.one_tech table, .rep_claim table, .rep_sms table, .rep_np table, .statistic table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.one_tech td, .rep_claim td, .rep_sms td, .rep_np td, .statistic td{
+    border: 1px solid royalblue;
+    text-align: center;
+}
+.rep_np .rub{
+    width: 100px;
+}
+.rep_claim th, .rep_sms th, .statistic th{
+    border: 1px solid royalblue;
+    background-color: lightsteelblue;
+}
+.one_tech td:last-child{
+    width: 30%;
+    text-align: right;
+    padding-right: 8px;
+}
+.rep_sms td:last-child{
+    text-align: left;
+    width: 750px;
+}
+.name{
+    width: 22%;
+}
+.one_tech .name_tech{
+    width: 100%;
+    background-color: lightblue;
+    text-align: center;
+}
+.uslobozn{
+    width: 150px;
+    display: inline-block;
+    border: 1px solid royalblue;
+}
+
+/*снабжение*/
+.content_main h2{
+    text-align: center;
+    text-shadow: 1px 1px 2px darkcyan, 0 0 4px aquamarine;
+    padding-top: 20px;
+}
+.deliv_about{
+    width: 250px;
+    background-color: aliceblue;
+    padding: 20px;
+}
+.deliv_admin{
+    background-color: darkcyan;
+    color: wheat;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 15px;
+}
+.deliv_add{
+    height: 60px;
+    line-height: 60px;
+    padding-left:  20px;
+}
+.deliv_list{
+    margin: 20px auto;
+}
+.deliv_list table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.deliv_list th, .deliv_list td{
+    border: solid 1px darkcyan;
+}
+.deliv_list th{
+    background-color: darkcyan;
+    color: wheat;
+}
+.delivmat div{
+    font:  8pt sans-serif;
+    text-align: left;
+}
+.note{
+    display: none;
+    width:400px;
+}
+.elem_list:hover div{
+    background-color: #c8b9e2;
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 0;
+}
+.rub{
+    text-align: right;
+    padding-right: 4px;
+}
+.grafik_dis table{
+    margin-bottom: 20px;
+}
+
+/*выпадающее окно при входящем звонке*/
+.windcl{
+    position: fixed;
+    width: 980px;
+    height: 96%;
+    background-color: #ffffe3;
+    border: solid 6px #fff8bb;
+    border-radius: 4px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.head, .head2{
+    background-color: lightgreen;
+}
+.head{
+    font-size: 1.3em;
+    text-align: center;
+}
+.btn{
+    float: right;
+}
+.btn-snab{
+    position: fixed;
+    right: 20px;
+    background-color: #9fd2d7;
+    padding: 10px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.btn-snab:first-of-type{
+    right: 140px;
+}
+.zagol, .punkt{
+    background-color: greenyellow;
+    width: 30%;
+    text-align: right;
+    padding-right: 5px;
+    margin-right: 10px;
+}
+.zagol{
+    display: inline-block;
+}
+.rowcl{
+    padding: 5px;
+}
+.cellcl{
+    display: inline-block;
+    max-width: 65%;
+}
+.ordercl{
+    width: 43%;
+    display: inline-block;
+    border: 2px aquamarine solid;
+    margin: 5px;
+}
+.errorcl{
+    color: red;
+    font-size: 0.7em;
+    text-align: right;
+}
+.infocl{
+    background-color: white;
+    width: 400px;
+    margin-left: 32%;
+    color: #666;
+    cursor: pointer;
+}
+.clientid{
+    position: absolute;
+    background-color: darkgreen;
+    font-size: 0.9em;
+    color: wheat;
+    padding: 2px 9px;
+}
+/*страница сообщений*/
+
+.message{
+    background-color: honeydew;
+    margin: 10px 2px;
+    width: 80%;
+
+}
+.msg_new{
+    font-weight: 600;
+    background-color: #d0fff7;
+}
+.mine_msg{
+    background-color: #fff6e0;
+    text-align: right;
+}
+.msg_time{
+    margin: 10px 0;
+    padding: 0 20px;
+    background-color: rgba(201, 77, 88, 0.20);
+}
+.msg_from{
+    font-weight: normal;
+    font-size: 0.8em;
+    font-style: italic;
+    padding: 4px;
+}
+.msg_tosend {
+    position: fixed;
+    bottom: 5px;
+    right: 10px;
+    width: 800px;
+    background-color: rgba(255, 246, 224, 0.72);
+}
+
+/*CRM*/
+.button-input{
+    width: 115px;
+    background: #8591a5;
+    color: #fff;
+    border-color: transparent !important;
+    text-transform: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+    padding: 0 20px;
+    height: 40px;
+    position: relative;
+    display: inline-block;
+    border-radius: 3px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.list__top__actions a{
+    text-decoration: none;
+    text-align: center;
+    padding: 0;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+.modal{
+    position: fixed !important;
+    top: 0;
+    left: 50px;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    overflow: hidden;
+    display: none;
+}
+.modal-body{
+    margin: auto;
+    padding: 30px;
+    padding-top: 25px;
+    padding-bottom: 35px;
+    width: 710px;
+    background: #f5f5f5;
+    border: 1px solid #d3d6d7;
+    border-radius: 1px;
+    top: 100%;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    box-shadow: 0 14px 24px 1px rgba(0,0,0,.1);
+    z-index: 2;
+}
+.modal-body__inner{}
+
+.button-cancel{
+    margin-left: 7px;
+    text-transform: none;
+    /*border: 1px solid;*/
+    /*border-color: #d3d6d7 !important;*/
+    display: inline-block;
+    font-weight: 700;
+    color: #92989b;
+    background: 0 0;
+    text-align: center;
 }

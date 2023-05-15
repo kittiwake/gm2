@@ -40,7 +40,7 @@ function Left(obj)
 	{
 		while (obj.offsetParent)
 		{
-			curleft += obj.offsetLeft
+			curleft += obj.offsetLeft;
 			obj = obj.offsetParent;
 		}
 	}
@@ -56,12 +56,14 @@ function Top(obj)
 	{
 		while (obj.offsetParent)
 		{
-			curtop += obj.offsetTop
+			curtop += obj.offsetTop;
 			obj = obj.offsetParent;
 		}
 	}
 	else if (obj.y)
 		curtop += obj.y;
+
+	console.log(obj);
 	return curtop;
 }
 
@@ -95,11 +97,15 @@ document.all?document.attachEvent('onclick',checkClick):document.addEventListene
 var updobj;
 function lcs(ielem) {
 	updobj=ielem;
-    getObj('fc').style.position='absolute';
-	getObj('fc').style.left=(Left(ielem)-60)+'px';
-    getObj('fc').style.top=Top(ielem)+ielem.offsetHeight+'px';
+    getObj('fc').style.position='fixed';
+	// getObj('fc').style.left=(Left(ielem)-60)+'px';
+    // getObj('fc').style.top=Top(ielem)+ielem.offsetHeight+'px';
 	getObj('fc').style.display='';
-	
+
+	var box = ielem.getBoundingClientRect();
+// console.log(box);
+	getObj('fc').style.left=(box.left-60)+'px';
+	getObj('fc').style.top=(box.top+box.height)+'px';
 	// First check date is valid
 	curdt=ielem.value;
 	curdtarr=curdt.split('-');

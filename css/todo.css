@@ -1,0 +1,162 @@
+.pipeline_row{
+    display: flex;
+    justify-content: center;
+}
+.pipeline_cell{
+    padding-left: 15px;
+    padding-right: 7px;
+    min-width: 305px;
+    max-width: 350px;
+    flex-grow:1;
+    flex-shrink: 0;
+    width: 312px;
+    position: relative;
+    height: 100%;
+    /*z-index: 20;*/
+}
+.pipeline_status__head{
+    text-align: center;
+}
+.pipeline_status__head_title{
+    font-family: 'PT Sans Caption','Arial Black',sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.block-counter{
+    font-size: 15px;
+    color: #333;
+    opacity: 0.7;
+}
+.pipeline_items__list{
+    min-height: calc(100vh - 170px);
+    height: 100%;
+    vertical-align: baseline;
+}
+.todo-line__item{
+    cursor: move;
+    background: #f4f3f4;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 3px;
+    margin: 0 0 5px;
+    padding: 5px 8px 4px;
+    position: relative;
+}
+.todo-line__item-contacts{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 13px;
+    line-height: 17px;
+}
+
+.todo-line__item-data{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 13px;
+    line-height: 17px;
+    color: #8f9a9d;
+}
+.todo-line__item-data-time {
+    color: #363b44;
+    margin-right: 4px;
+}
+.todo-line__item-members {
+    display: flex;
+}
+
+.todo-line__item-body{
+    min-height: 17px;
+}
+.todo-line__item-body-type{
+    font-size: 13px;
+    line-height: 16px;
+    float: left;
+    clear: right;
+    font-weight: 700;
+}
+.todo-line__item p {
+    font-size: 13px;
+    line-height: 17px;
+    /*max-height: 36px;*/
+}
+.todo-form{}
+.cust_card{}
+.control-contenteditable{
+    position: relative;
+    box-shadow: none;
+    background-color:  white;
+    border: 1px solid #d3d6d7;
+    min-height: 71px;
+    max-height: 200px;
+    overflow-y: auto;
+    cursor: text;
+}
+.control-contenteditable__area{
+    white-space: pre-wrap;
+    /*background-color: #359bff;*/
+    cursor: text;
+    margin-left: 155px;
+}
+.card-task__type{
+    display: flex;
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    float: left;
+}
+.card-task__buttons{
+    display: flex;
+}
+.task-submit{}
+.transfer_data{
+    width: 100%;
+    padding-top: 10px;
+}
+.card-task__transfer{
+    display: flex;
+    margin-top: 8px;
+}
+.button-input-inner{}
+.cust_card {
+    background-color: white;
+    margin-bottom: 5px;
+    border: 1px solid #d3d6d7;
+    color: #92989b;
+}
+.cust_card input{
+    padding: 4px;
+    width: 95%;
+    outline: none;
+    border: none;
+}
+.cust_card__found{
+    background: white;
+    border: 1px solid #d3d6d7;
+    position: absolute;
+    z-index: 400;
+    min-width: 140px;
+    display: none;
+    cursor: pointer;
+}
+.invisible{
+    display: none;
+}
+.todo-line__item_active{
+    background-color: white;
+}
+.todo-line__item-lost{
+    color: deeppink;
+}
+.card-task__result{
+    display: flex;
+}
+.text_result{
+    width: 100%;
+    resize: none;
+    outline: none;
+    border: 1px solid #d3d6d7;
+    border-radius: 3px;
+    box-sizing: border-box;
+    height: 38px;
+    min-height: 38px;
+}

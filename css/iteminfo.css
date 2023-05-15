@@ -1,0 +1,66 @@
+.content-inner-left{
+    background-color: ghostwhite;
+    width: 30%;
+    height: 100%;
+}
+.client-card__name{
+    background-color: #555;
+    color: #fff;
+    height: 90px;
+}
+.client-name{
+    font-size: 2em;
+    margin: 14px;
+}
+.callman{
+    position: inherit;
+    float: right;
+    margin: 0 40px
+}
+.client-card{
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.client-card__contact-row{
+    display: flex;
+    font-size: 1.5em;
+    margin: 10px 0;
+    justify-content:space-around;
+}
+.contact-label{
+    width: 35%;
+}
+.contact-value{
+    width: 60%
+}
+.client-card__leads{
+    border-top: double gray 4px;
+    margin-right: 10px;
+    padding-top: 20px;
+}
+.leads-item{
+    border: solid 1px beige;
+    min-height: 50px;
+    margin: 5px;
+}
+.client-name input, .client-card__contact-row input{
+    /*     text-decoration: underline; */
+    text-decoration: none;
+    padding: 0;
+
+    border-radius: 0;
+    border: 0;
+    width: 100%;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.client-name input{
+    background-color: #555;
+    font-size: 1em;
+    color: #fffceb;
+}
+.client-card__contact-row input{
+    background-color: ghostwhite;
+    font-size: 1.1em
+}
