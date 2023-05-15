@@ -18,7 +18,6 @@ class Datas {
         return $code;
     }
 
-
     public static function checkPole ($pole){
 
         if (strlen($pole)>0 && $pole!='0'){
@@ -34,6 +33,7 @@ class Datas {
 
     public static function checkSunday($date){//принимает дату в формате DD-MM-YYYY
 
+        if(empty($date))return false;
         $elem = explode('-', $date);
         $D = array_shift($elem);
         $M = array_shift($elem);
@@ -60,6 +60,19 @@ class Datas {
 
         if (preg_match('/^.*[РрД][1-9]?$/', $contract) == 1){
             return true;
+        }
+        return false;
+    }
+
+    public static function isDillers ($contract){//если рекламация, возвращаем true
+
+        //список диллеров
+        $dillers = array('ROLF','БР','СЕР','NZ');
+        foreach($dillers as $dill){
+            $pattern = '/^'.$dill.'-/';
+            if (preg_match($pattern, $contract) == 1){
+                return true;
+            }
         }
         return false;
     }
@@ -115,6 +128,94 @@ echo $item['key_a'] . ', ' . $item['key_b'] . "\n";
             $sname .= $N.'.';
         }
         return $sname;
+    }
+
+    public static function nameFathername($fullname){//принимает 2 или 3 слова, 1-ое из которых - фамилия
+
+        $elem = explode(' ', $fullname);
+        $sname = array_shift($elem);
+        $name = array_shift($elem);
+        $fname = array_shift($elem);
+
+        $nfn = '';
+
+        if(isset ($name)){
+            $nfn .= $name;
+        }
+        if(isset ($fname)){
+            $nfn .= ' ' . $fname;
+        }
+        if(!isset ($name) && !isset ($fname)){
+            $nfn = $fullname;
+        }
+        return $nfn;
+    }
+
+    public static function userStartPage($ri){
+        switch($ri){
+            case 0: $cont = '/schedule/orders';
+                break;
+            case 1: $cont = '/schedule/orders';
+                break;
+            case 2: $cont = '/claim';
+                break;
+            case 3: $cont = '/schedule/orders';
+                break;
+            case 4: $cont = '/schedule/orders';
+                break;
+            case 5: $cont = '/designer';
+                break;
+            case 6: $cont = '/technologist/schedule';
+                break;
+            case 7: $cont = '/technologist/schedule';
+                break;
+            case 8: $cont = '/delivery/schedule';
+                break;
+            case 9: $cont = '/schedule/orders';
+                break;
+            case 10: $cont = '/skedCeh/getPlan';
+                break;
+            case 15: $cont = '/alexandria/schedule';
+                break;
+            case 16: $cont = '/schedule/mdf';
+                break;
+            case 17: $cont = '/collector';
+                break;
+            case 19: $cont = '/schedule/orders';
+                break;
+            case 58: $cont = '/report/NP';
+                break;
+            case 99: $cont = '/skedCeh/getPlan';
+                break;
+        }
+        return $cont;
+
+    }
+
+    public static function getPathFromYear($plan,$contract){
+
+        $arrdte = explode('-',$plan);
+        $year = $arrdte[0];
+
+        $path = '/'.$year.'/';
+        $pieces = explode("-", $contract);
+
+        if (($pieces[0]+0) != 0 ){
+            $path .= $pieces[0].'-'.$pieces[1][0].'00-'.$pieces[1][0].'99/'.$contract;
+        }
+        elseif(mb_substr($contract,0,1,'utf-8') == 'Р'){
+            $path .= 'Салон/'.$contract;
+        }
+        elseif(mb_substr($contract,0,1,'utf-8') == 'Г'){
+
+            $path .= 'Гранд/ГР-'.$pieces[1];
+
+        }
+        else{
+            $path .= 'Дилеры/'.$contract;
+        }
+
+        return $path;
     }
 
 }

@@ -26,18 +26,29 @@ class Notes {
 
     }
 
-    public static function setNote($oid, $note){
+    public static function setNote($oid, $note, $use = 'order'){
 
         $db = Db::getConection();
 
         $res = $db->prepare("
-INSERT INTO `notes` (`oid`, `note` , `date`)
-VALUES (:oid, :note, CURDATE())
+INSERT INTO `notes` (`oid`, `note` , `date`, `use`)
+VALUES (:oid, :note, CURDATE(), :use)
 	  ");
         $res->execute(array(
             'oid'=>$oid,
-            'note'=>$note
+            'note'=>$note,
+            'use'=>$use
         ));
+
+    }
+    public static function delOrderByOid($oid){
+
+        $db = Db::getConection();
+
+        $res = $db->prepare('DELETE FROM `notes` WHERE `oid` = ?');
+        $answ = $res->execute(array($oid));
+
+        return $answ;
 
     }
 
