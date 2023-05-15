@@ -88,60 +88,57 @@
 </style>
 <div class="content">
     <input type="hidden" id="pole">
-
     <div class="plceh_graf">
 
         <div class="plceh_date">
             <div id="today"><a href="/plan/ceh">сегодня</a></div>
-            <a href="/plan/ceh1/<?=$date-60*60*24*7;?>">
+            <a href="/plan/ceh/<?=$date-60*60*24*7;?>">
                 <span><<&nbsp;&nbsp;</span>
             </a>
-            <a href="/plan/ceh1/<?=$date-60*60*24;?>">
+            <a href="/plan/ceh/<?=$date-60*60*24;?>">
                 <span>&nbsp;&nbsp;<&nbsp;&nbsp;</span>
             </a>
             <span id="date"><?=$userdate;?></span>
-            <a href="/plan/ceh1/<?=$date+60*60*24;?>">
+            <a href="/plan/ceh/<?=$date+60*60*24;?>">
                 <span>&nbsp;&nbsp;>&nbsp;&nbsp;</span>
             </a>
-            <a href="/plan/ceh1/<?=$date+60*60*24*7;?>">
+            <a href="/plan/ceh/<?=$date+60*60*24*7;?>">
                 <span>&nbsp;&nbsp;>></span>
             </a>
         </div>
 
 
-        <!--        <div class="plceh_date">-->
-        <!--            <a href="/plan/ceh/--><?//=$date-60*60*24;?><!--"><span><< </span></a>-->
-        <!--            <span id="date">--><?//=$userdate;?><!--</span>-->
-        <!--            <a href="/plan/ceh/--><?//=$date+60*60*24;?><!--"><span> >></span></a>-->
-        <!--        </div>-->
+<!--        <div class="plceh_date">-->
+<!--            <a href="/plan/ceh/--><?//=$date-60*60*24;?><!--"><span><< </span></a>-->
+<!--            <span id="date">--><?//=$userdate;?><!--</span>-->
+<!--            <a href="/plan/ceh/--><?//=$date+60*60*24;?><!--"><span> >></span></a>-->
+<!--        </div>-->
         <?php for($i=0; $i<2; $i++):?>
-            <div class="plceh_table">
-                <?php foreach($shablon[$i] as $key=>$val):?>
-                    <div class="span33" id="<?=$key;?>">
-                        <div class="span_zagol"><?=$val;?></div>
-                        <div class="plceh_list2">
-                            <?php foreach($list_graf[$arr_stan[$key]] as $arrord):?>
-                                <?php
-//                            var_dump($arrord);
-                                $bgc = '#DFFFE4';
-                                if(strtotime($arrord['date']) < strtotime('today')) $bgc = '#ff6083';
-                                if($arrord['stan']==2) $bgc = '#00b050';
-                                ?>
-                                <div>
-                                    <div class="mater"><?= $arrord['mater'];?></div>
-                                    <div id="<?=$key.'-'.$arrord['oid']?>" style="background-color: <?=$bgc;?>" data-stan="<?=$arrord['stan'];?>" data-part="<?=$arrord['partid'];?>">
-                                        <?=isset($arrord['suff'])?$arrord['contract'].'_'.$arrord['suff']:$arrord['contract'];?>
-                                    </div>
-                                </div>
-                            <?php endforeach;?>
-                            <?php ?>
+        <div class="plceh_table">
+            <?php foreach($shablon[$i] as $key=>$val):?>
+                <div class="span33" id="<?=$key;?>">
+                    <div class="span_zagol"><?=$val;?></div>
+                    <div class="plceh_list2">
+                        <?php foreach($list_graf[$arr_stan[$key]] as $arrord):?>
+                            <?php
+                            $bgc = '#DFFFE4';
+                            if(strtotime($arrord[$arr_stan_date[$key]]) < strtotime('today')) $bgc = '#ff6083';
+                            if($arrord[$arr_stan[$key]]==2) $bgc = '#00b050';
+                            ?>
+                        <div>
+                            <div class="mater"><?= $arrord['mater'];?></div>
+                            <div id="<?=$key.'-'.$arrord['id']?>" style="background-color: <?=$bgc;?>" data-stan="<?=$arrord[$arr_stan[$key]];?>">
+                                <?=$arrord['contract']?>
+                            </div>
                         </div>
+                        <?php endforeach;?>
+                        <?php ?>
                     </div>
-                <?php endforeach;?>
-            </div>
+                </div>
+            <?php endforeach;?>
+        </div>
         <?php endfor;?>
     </div>
-
     <div class="plceh_graf btn">
         <button id="planbtn" onclick="progression();" disabled>Изменить последовательность</button>
         <button id="stanbtn" onclick="planCehStan();" disabled>Отметить готовность</button>
@@ -149,40 +146,28 @@
             <button>Разбить на части</button>
         </a>
     </div>
-
     <div class="plceh_list" id="list1">
         <?php for($d=0; $d<30; $d++):?>
             <div class="plceh_oneday">
                 <div class="plceh_oneday_label"><?echo $week[date('w', strtotime('today')+$d*24*3600)]. ', ' .date('d.m', strtotime('today')+$d*24*3600)?></div>
                 <?php if(isset($orders[$d])):?>
                     <?php foreach($orders[$d] as $key=>$arr):?>
-                        <?php if(!empty($arr['parts'])):?>
-                        <?php foreach ($arr['parts'] as $part):?>
-                                <div>
-                                    <div class="mater"><?=$part['note'];?></div>
-                                    <div class="for_plan2" id="<?=$arr['oid'].'-'.$part['stan'].'-'.$part['pid'];?>">
-                                        <?=$arr['con'];?>_<?=$part['suf'];?>
-                                    </div>
-                                </div>
-                        <?php endforeach;?>
-                        <?php else:?>
-                            <div>
-                                <div class="mater"><?=$arr['mater'];?></div>
-                                <div class="for_plan2" id="<?=$arr['oid'].'-'.$arr['stan'];?>"><?=$arr['con'];?></div>
-                            </div>
-                        <?php endif;?>
+                    <div>
+                        <div class="mater"><?=$arr['mater'];?></div>
+                        <div class="for_plan2" id="<?=$arr['oid'].'-'.$arr['stan'];?>"><?=$arr['con'];?></div>
+                    </div>
                     <?php endforeach;?>
                 <?php endif;?>
             </div>
         <?php endfor;?>
     </div>
-    <div id="fon" class="planceh"></div>
-    <div class="form" id="porjadok">
-        nen xnj-nj
-    </div>
-    <div class="form" id="gotovnost">
-        nen xnj-nj
-    </div>
+        <div id="fon" class="planceh"></div>
+        <div class="form" id="porjadok">
+            nen xnj-nj
+        </div>
+        <div class="form" id="gotovnost">
+            nen xnj-nj
+        </div>
 </div>
 <script type="text/javascript">
 

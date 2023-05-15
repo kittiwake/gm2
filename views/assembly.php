@@ -11,7 +11,7 @@
                             <div class="ass_con"><?=$sborka['con']?></div>
                             <div class="ass_con"><?=$sborka['coll']?></div>
                             <div class="ass_con" id="div<?=$sborka['oid']?>" style="width: 50px; padding-right: 40px;">
-                                <input type="button" id="<?=$sborka['oid']?>" value="Закрыть заказ" onclick="closeOrder(this.id)">
+                                <input type="button" id="<?=$sborka['oid']?>" value="Закрыть заказ" onclick="closeOrder(this.id,<?=$ri?>)">
                             </div>
                         </div>
                         <?php endforeach; ?>

@@ -3,7 +3,8 @@
         echo $error;
     }
     ?>
-    <form method="post" action="/<?=SITE_DIR;?>/auth">
+    <div style="height: 50px;">&nbsp;</div>
+    <form method="post" action="/">
         <table>
             <tr>
                 <td>Логин</td>

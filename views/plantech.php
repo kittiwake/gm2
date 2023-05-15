@@ -16,7 +16,7 @@
                             <?=$order['contract'];?>
                         </div>
                     </td>
-                    <td><?=$order['sum'];?></td>
+                    <td class="rub"><?=$order['sum'];?>р.</td>
                     <td><?=date('d.m', strtotime($order['term']));?></td>
                     <td><?=array_key_exists($order['designer'],$disList)?$disList[$order['designer']]:'';?></td>
                 </tr>

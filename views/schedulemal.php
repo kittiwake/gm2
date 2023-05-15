@@ -41,16 +41,15 @@
                                             if (($lit1 == 'Р') || ($lit2 == 'Р')) $cbgcol = 'FFD700';
                                         }
                                         elseif ($day['upak_end'] == 2) $cbgcol = '00b050';
-                                        elseif (isset($tip) && $tip==2 && $day['emal'] == 1) $cbgcol = '00b097';
+                                        elseif ($day['emal'] == 1) $cbgcol = '00b097';
                                         elseif ($day['tech_end'] == 2) $cbgcol = '00b0f0';
                                         elseif ($day['technologist'] != 0) $cbgcol = '99ccff';
-                                        if (strtotime("today")>strtotime($day['term']) && $day['otgruz_end'] !== '2' && $day['term'] != '0000-00-00') $ctcol = '7030a0; font-weight:800';
-                                        if (($lit1 == 'Р') || ($lit2 == 'Р')) $ctcol = 'a60303; font-weight:800';
-                                        if ($lit1 == 'В') $ctcol = '0501c0; font-weight:800';
-                                        if($day['attention'] == 1) $ctcol = 'f30; font-weight:800';
+                                        if($day['emal_booked'] != 0 && $day['mat_oblic'] == 0)$ctcol='fff';
+                                        if($day['emal_booked'] == 0 && $day['v_ceh'] != 0)$ctcol='f00';
+                                        // if($day['attention'] == 1) $ctcol = 'f30; font-weight:800';
                                         $sign = '';
-                                        if ($day['rassr'] == 1) $sign = '<img class="rad" src="/images/rassr.jpg">';
-                                        if ($day['beznal'] == 1) $sign = '<img class="rad" src="/images/bank.jpg">';
+                                        // if ($day['rassr'] == 1) $sign = '<img class="rad" src="/images/rassr.jpg">';
+                                        // if ($day['beznal'] == 1) $sign = '<img class="rad" src="/images/bank.jpg">';
                                         if ($day['term']=='0000-00-00'){
                                             $date = '<img src="/images/otkr.png">';
                                         }else{
@@ -64,6 +63,7 @@
                                                 <a href='<?=$url . $oid;?>'  style="color: #<?=$ctcol;?>">
                                                     <?=$contract;?>
                                                 </a>
+                                                <?php //debug($day);?>
                                             </td>
                                             <td class="summa rub" bgcolor="<?=$cbgcol;?>">
                                                 <?php

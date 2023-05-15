@@ -1,7 +1,11 @@
 <div class="content">
+    <input type="hidden" id="oid3" value="">
+    <input type="hidden" id="m_date" value="">
+
     <div id="fon"></div>
-    <div id="form">
-        <form action="duplicate" method="post">
+    <div id="change_target"></div>
+    <div id="duplicate" class="form">
+        <form method="post" action="#">
             Сборку заказа № <label></label>
             <input type="hidden" value="" id="oid" name="oid">
             <input type="hidden" value="" id="exdate" name="exdate">
@@ -12,63 +16,44 @@
             <input type="submit" name="submitok" value="Ok">
         </form>
     </div>
+    <div id="form2" class="form">
+        <div id="notes">
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <div id="addmount">
+            <input type="text" id="dateofmount" onfocus="this.select();lcs1(this)" onclick="event.cancelBubble=true;this.select();lcs1(this);">
+            <br>
+            <label><input type="radio" name="target" value="assembly" checked> Сборка</label>
+            <br>
+            <label><input type="radio" name="target" value="measure"> Замер</label>
+            <br>
+            <label><input type="radio" name="target" value="previously"> Шаблон</label>
+            <br>
+            <input type="button" value="Назначить" onclick="saveMounting(<?=$ri?>);">
+        </div>
+    </div>
+    <div class="form" id="form3">
+<!--        выходных сборщиков удаляет скрипт js-->
+        <?php foreach($sborList as $uid=>$name):?>
+            <div class="list_user" id="us<?=$uid;?>">
+                <label><input type="radio" name="colname" value="<?=$uid;?>"><?=$name;?></label>
+            </div>
+        <?php endforeach;?>
+        <input type="button" value="Добавить" onclick="addMount();">
+    </div>
     <div class="planirovanie">
         <div class="ass_row">
             <div class="ass_cell active" id="plan" onclick="inPlanirovanie('plan');">плановые</div>
-      <!--      <div class="ass_cell passive" id="mount" onclick="inPlanirovanie('mount')">незакрытые сборки</div> -->
             <div class="ass_cell passive" id="holiday" onclick="inPlanirovanie('holiday')">выходные</div>
         </div>
         <div class="plan_ass" id="in_plan">
-
-            <table>
-                <tr>
-                    <td>№заказа</td>
-                    <td>Дата</td>
-                    <td>Сборщик</td>
-                </tr>
-                <?php foreach($in_plan as $key=>$moun): ?>
-                    <tr>
-                        <td><?=$moun['con']?></td>
-                        <td id="datecoll<?=$key?>">
-                            <input type="text" value="" size="8" id="d<?=$key?>" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this);$('#bt<?=$key?>').show();">
-                        </td>
-                        <td id="namecoll<?=$key?>">
-                            <?php if(isset($moun['sbname'])){
-                                echo $moun['sbname'];
-                            }else{
-                                ?>
-                                <select id="sb<?=$key?>" onchange="$('#bt<?=$key?>').show();">
-                                    <option value="0" selected> </option>
-                                    <?php foreach ($sborList as $keysb=>$collector):?>
-                                        <option value="<?=$keysb?>"><?=$collector?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            <?php } ?>
-                            <input type="button" id="bt<?=$key?>" value="Ok" style="display: none" onclick="saveMounting(this.id,0);">
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
+            <?php foreach($in_plan as $key=>$moun): ?>
+                <div onclick="showFormAddingMount(<?=$key;?>)" style="background-color: <?=$moun['color']?>"><?=$moun['con']?></div>
+            <?php endforeach;?>
         </div>
- <!--       <div class="plan_ass" id="in_mount">
-            <table>
-                <tr>
-                    <td>№заказа</td>
-                    <td>Дата</td>
-                </tr>
-                <?php foreach($in_process as $key=>$moun): ?>
-                    <tr id="str<?=$key?>">
-                        <td><?=$moun['con']?></td>
-                        <td>
-                            <input type="text"  id="d<?=$key?>" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this);$('#bt<?=$key?>').show();">
-                            <input type="hidden" id="sb<?=$key?>" value="<?=$moun['sbname']?>">
-                            <input type="button" id="bt<?=$key?>" value="Ok" style="display: none" onclick="saveMounting(this.id, 1);">
-                        </td>
-                    </tr>
-                <?php endforeach;?>
-            </table>
-        </div>
-        -->
         <div class="plan_ass" id="in_holiday">
             <?php foreach ($sborList as $keysb=>$collector):?>
                 <div id="hol<?=$keysb?>">
@@ -93,56 +78,71 @@
         <?php foreach($ass_list as $key=>$mount):
             $date = strtotime($key);?>
             <div class="oneday">
-                <div id="date"><?php echo date('d.m', $date)?></div>
-                <div class="coll_list">
-                    <div class="row">
-                        <?php foreach($sborList as $uid=>$collector):?>
-
-                            <div class="cel"
-                                <?php if(in_array($uid, $coll_hol[$key])):?>
-                                    style="background-color: rosybrown"
-                                <?php endif;?>
-
-                                ><?=$collector?></div>
-
+                <?php if($date>=strtotime('today')):?>
+                    <div class="free" id="free-<?=$date;?>">
+                        Выходные
+                        <?php foreach($sborList as $uid=>$name):?>
+                            <div class="list_free_user" id="free<?=$uid;?>-<?=$date?>" style="display: none">
+                                <?=$name;?>
+                            </div>
                         <?php endforeach;?>
                     </div>
-                </div>
-                <div>
-                    <table>
-                        <?php foreach($mount as $moun):?>
-                        <tr>
-                            <td>
-                                <div id="<?=$moun['oid']?>d<?=$key?>" onclick="showForm(this.id);">
-                                    <?=$moun['con']?>
-                                </div>
-                            </td>
-                            <td><?=$moun['adress']?></td>
-                            <td>
-                                <div id="name<?=$moun['oid']?>d<?=$key?>" onclick="$('#sd<?=$moun['oid']?>d<?=$key?>').show();$(this).hide();">
+                <?php endif;?>
+                <div class="table">
+                    <div class="date" id="date-<?=$date;?>"><?php echo date('d.m', $date)?>, <?php echo $week[date('w', $date)]?></div>
+                    <div>
+                        <table>
+                            <?php foreach($mount as $moun):?>
+                                <tr>
+                                    <td width="50px">
+                                        <div id="<?=$moun['oid']?>d<?=$key?>" onclick="showForm(this.id);">
+                                            <?=$moun['con']?>
+                                        </div>
+                                    </td>
+                                    <td id="<?=$moun['oid']?>td<?=$key?>" width="30px" onclick="changeTarget(this);">
+                                        <?php if($moun['target'] != 'assembly'):?>
+                                            <?php echo $moun['target']=='measure'?'Замер':'Шаблон'?>
+                                        <?php else:?>
+                                            <?=$moun['sum']?>р.
+                                        <?php endif;?>
+                                    </td>
+                                    <td>
+                                        <?=$moun['adress']?>
+                                        <div class="m_note">
+                                            <?=$moun['m_note']?>
+                                        </div>
+                                        <button onclick="addMountNote(this,'sta')">Добавить примечание</button>
+                                        <div style="display: none">
+                                            <textarea rows="2" cols="45"></textarea>
+                                            <button onclick="addMountNote(this,'add')">Cохранить</button>
+                                        </div>
+                                    </td>
+                                    <td  width="50px">
+                                        <!--               <div id="name<?=$moun['oid']?>d<?=$key?>" onclick="$('#sd<?=$moun['oid']?>d<?=$key?>').show();$(this).hide();">
                                     <?php echo $moun['sbname']=='' ? '&nbsp;' : $moun['sbname']; ?>
-                                </div>
-                                <div id="sd<?=$moun['oid']?>d<?=$key?>" style="display: none">
-                                    <select id="sc<?=$moun['oid']?>d<?=$key?>" onchange="changeColl(this.id);">
-                                        <option value="0" selected> </option>
-                                        <?php foreach ($sborList as $keysb=>$collector){?>
-                                            <?php if(!in_array($keysb, $coll_hol[$key])):?>
-                                            <option value="<?=$keysb?>"><?=$collector?></option>
-                                            <?php endif;?>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </td>
-                            <td id="div<?=$moun['oid']?>">
-                                <?php if($date<=strtotime('today')):?>
-                                    <input type="button" id="<?=$moun['oid']?>" value="Закрыть заказ" onclick="closeOrder(this.id)">
-                                <?php endif;?>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                    </table>
+                                </div> -->
+                                        <?php foreach($moun['sbname'] as $uid=>$collector):?>
+                                            <div>
+                                                <?=$collector;?>
+                                                <img src="/images/0.jpg" onclick="delCol(<?=$moun['oid'];?>,<?=$uid;?>,<?=$date?>);">
+                                            </div>
+                                        <?php endforeach;?>
+                                        <div><img src="/images/1.jpg" onclick="showFormAddingCol(<?=$moun['oid'];?>, <?=$date;?>, 17)"></div>
+                                    </td>
+                                    <td id="div<?=$moun['oid']?>" width="50px">
+                                        <?php if($date<=strtotime('today') && $moun['target'] == 'assembly'):?>
+                                            <input type="button" id="<?=$moun['oid']?>" value="Закрыть заказ" onclick="closeOrder(this.id,<?=$ri?>)">
+                                        <?php endif;?>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
+                        </table>
+                    </div>
                 </div>
             </div>
         <?php endforeach;?>
     </div>
 </div>
+
+
+
