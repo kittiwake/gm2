@@ -4,18 +4,25 @@
 define ('DS', DIRECTORY_SEPARATOR); // разделитель для путей к файлам
 $sitePath = realpath(dirname(__FILE__) . DS) . DS;
 define ('SITE_PATH', $sitePath); // путь к корневой папке сайта
-//echo SITE_PATH;
-//C:\OpenServer\domains\localhost\gm17\
 $siteDir =  basename(dirname(__FILE__));
 define ('SITE_DIR', $siteDir);
 
-//константы для подключения к базе данных
+
+define ('GM_SERVER', '<хостинг>');
+
+
+
+на ноутбуке
 define('HOST', 'localhost'); 		//сервер
 define('USER', 'root'); 			//пользователь
 define('PASSWORD', 'mysql'); 			//пароль
-define('NAME_BD', 'bdgm');		//база
+define('NAME_BD', '<название>');		//база
 
-define('API_ID', '9607f96b-2fa0-ca34-7915-1a2489e0ff61');
+define('API_ID', '<ключ sms.ru>');
+
+define('ZADARMA_IP', '<сервер>');
+define('API_SECRET', '<ключ>');  // You can get it from https://my.zadarma.com/api/
+
 
 function __autoload($class_name){
 
