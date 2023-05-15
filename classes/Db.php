@@ -12,7 +12,8 @@ class Db {
 
         $dsn = 'mysql:host='.HOST.'; dbname='.NAME_BD;
         $db = new PDO($dsn,USER,PASSWORD);
-        $db -> exec("SET CHARACTER SET utf8");
+        $db -> exec("SET CHARACTER SET 'utf8'");
+        $db -> exec("SET NAMES 'utf8'");
 
         return $db;
     }

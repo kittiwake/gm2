@@ -7,6 +7,13 @@
  */
 
 class Router {
+
+    private $sessErr;
+
+    public function __construct($sessErr) {
+        $this->sessErr = $sessErr;
+    }
+
     private function getRoute() //получить маршрут .htaccess формирует ссылку таким образом что в параметры гет запроса попадает требуемый маршрут
     {
         if (empty($_GET['route']))
@@ -24,8 +31,12 @@ class Router {
         $routes = $this->getRoute();
         //определить контроллер и экшн
         $segments = explode('/', $routes);
-
-        $controllerName = 'Controller_' . array_shift($segments);
+//var_dump($segments); die;
+        $controller = array_shift($segments);
+        if(empty($controller)){
+            $controller = 'index';
+        }
+        $controllerName = 'Controller_' . $controller;
 
         $action = array_shift($segments);
         if(empty($action)){
@@ -35,22 +46,41 @@ class Router {
 
         //определить параметры
         $parameters = $segments;
+//debug($_SESSION);
+        switch($this->sessErr){
+            case 'You are denied access':
+                echo 'Сюда нельзя';
+                break;
+            case 'session started' :
+            case 'session ok' :
+                //подключить контроллер
+                $controllerFile = SITE_PATH.'controllers'.DS.$controllerName . '.php';
+    //var_dump($controllerFile); die;
+                if(file_exists($controllerFile)){
+                    include_once($controllerFile);
+                }else{
+                    die ($controllerName . '.php Not Found');
+                }
+                //создать объект, вызвать метод
+                $controllerObj = new $controllerName;
 
-        //подключить контроллер
-        $controllerFile = SITE_PATH.DS.'controllers'.DS.$controllerName . '.php';
-        if(file_exists($controllerFile)){
+                //echo "actionName=".$actionName."<br><br><br>";
+                if (!call_user_func_array(array($controllerObj, $actionName),$parameters)){
+                    echo 'Не получилось...';
+                }
+                break;
+            case 'Invalid login or password' :
+            case 'You need to log in' :
+            default:
+//                echo 'Вы не прошли авторизацию';
+            $controllerFile = SITE_PATH.'controllers'.DS.'Controller_auth.php';
             include_once($controllerFile);
-        }else{
-            die ($controllerName . '.php Not Found');
+            $controllerObj = new Controller_auth;
+            $controllerObj->actionShowAuth();
+            break;
+
         }
 
-        //создать объект, вызвать метод
-        $controllerObj = new $controllerName;
-
-        //echo "actionName=".$actionName."<br><br><br>";
-        if (!call_user_func_array(array($controllerObj, $actionName),$parameters)){
-            echo 'Не получилось...';
-        }
 
 
 
